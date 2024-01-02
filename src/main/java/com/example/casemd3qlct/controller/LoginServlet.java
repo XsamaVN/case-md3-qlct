@@ -13,7 +13,7 @@ import javax.servlet.annotation.*;
 public class LoginServlet extends HttpServlet {
     UserServiceImpl userService = new UserServiceImpl();
     public static Integer idUserLogin = null;
-    List<User> userList = userService.getUserList();
+
 
         public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
             String action = request.getParameter("action");
@@ -54,6 +54,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     private void registerForm(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        List<User> userList = userService.getUserList();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         User user = new User(username,password);
@@ -65,7 +66,7 @@ public class LoginServlet extends HttpServlet {
     private void loginForm(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-
+        List<User> userList = userService.getUserList();
         boolean check = false;
         int index = -1;
         for (int i = 0; i < userList.size(); i++) {
@@ -77,6 +78,7 @@ public class LoginServlet extends HttpServlet {
         if(check == true){
             response.sendRedirect("/home");
             idUserLogin = userList.get(index).getId();
+            System.out.println(idUserLogin);
         }
         else {
             response.sendRedirect("/login");

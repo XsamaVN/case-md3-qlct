@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService {
             preparedStatement.setString(2, user.getPassword());
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
+            userList.add(user);
         } catch (SQLException e) {
             System.out.println(e);
         }
