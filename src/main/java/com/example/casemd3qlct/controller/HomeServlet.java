@@ -5,6 +5,7 @@ import com.example.casemd3qlct.service.UserServiceImpl;
 import com.example.casemd3qlct.service.WalletServiceImpl;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import javax.servlet.annotation.*;
 @WebServlet(name = "HomeServletServlet", value = "/home")
 public class HomeServlet extends HttpServlet {
     UserServiceImpl userService = new UserServiceImpl();
+    WalletServiceImpl walletService = new WalletServiceImpl();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
     String action = request.getParameter("action");
@@ -45,10 +47,17 @@ public class HomeServlet extends HttpServlet {
         RequestDispatcher requestDispatcher= request.getRequestDispatcher("user/home.jsp");
 
         if(LoginServlet.idUserLogin != null){
-        String username1 = userService.findByid(LoginServlet.idUserLogin).getUsername();
-        System.out.println(username1);
-        request.setAttribute("username", username1);}
+        String username = userService.findByid(LoginServlet.idUserLogin).getUsername();
+        int id = LoginServlet.idUserLogin;
+        List<Wallet> walletList = walletService.showAll(id);
+        System.out.println(username);
+        request.setAttribute("username", username);
+        request.setAttribute("initialBalance", walletService.getInitialBalanceById(LoginServlet.idUserLogin));
+        request.setAttribute("totalIncome", walletService.getTotalIncomeById(LoginServlet.idUserLogin));
+        request.setAttribute("totalExpense", walletService.getTotalExpenseById(LoginServlet.idUserLogin));
+        }
         requestDispatcher.forward(request,response);
+
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class WalletServiceImpl implements WalletService{
@@ -107,5 +108,62 @@ public class WalletServiceImpl implements WalletService{
             }
         }
         return index;
+    }
+
+    public Double getInitialBalanceById(int id){
+        int indexOf = findIndexById(id);
+
+        if(indexOf!=-1){
+            return walletList.get(indexOf).getInitialBalance();
+        }
+        else {
+            return null;
+        }
+    }
+
+    public Double getTotalIncomeById(int id){
+        Double totalIncome = null;
+        try (Connection connection = CreateConnector.getConnection();
+
+             PreparedStatement preparedStatement = connection.prepareStatement("select sum(amount) as `totalExpense` from wallet " +
+                     " join transaction on idWallet = wallet.id " +
+                     " join user on idUser = user.id" +
+                     " where user.id = ? and type like `%thu%`")) {
+            preparedStatement.setInt(1, id);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                totalIncome = rs.getDouble("totalIncome");
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+       return totalIncome;
+    }
+
+    public Double getTotalExpenseById(int id){
+        Double totalExpense = null;
+        try (Connection connection = CreateConnector.getConnection();
+
+             PreparedStatement preparedStatement = connection.prepareStatement("select sum(amount) as `totalExpense` from wallet " +
+                                                                                    " join transaction on idWallet = wallet.id " +
+                                                                                    " join user on idUser = user.id" +
+                                                                                    " where user.id = ? and type like `%chi%` " +
+                                                                                    " group by idWallet " +
+                                                                                    " order by totalExpense")) {
+            preparedStatement.setInt(1, id);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                totalExpense = rs.getDouble("totalExpense");
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return totalExpense;
+    }
+
+    public Double getCurrentBalanceById(int id){
+        return getInitialBalanceById(id) + getTotalIncomeById(id) - getTotalExpenseById(id);
     }
 }

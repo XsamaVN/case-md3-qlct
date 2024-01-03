@@ -79,6 +79,7 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("/home");
             idUserLogin = userList.get(index).getId();
             System.out.println(idUserLogin);
+
         }
         else {
             response.sendRedirect("/login");
