@@ -70,8 +70,8 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Your wallet:</h6>
 
-                    <a class="collapse-item" href="/wallet?action=create">add new wallet</a>
-                    <a class="collapse-item" href="/wallet">All wallet</a>
+                    <a class="collapse-item" href="/wallet?action=createWallet">ADD NEW WALLET</a>
+                    <a class="collapse-item" href="/home">ALL WALLET</a>
                 </div>
             </div>
         </li>
