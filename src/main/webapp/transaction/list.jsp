@@ -180,128 +180,133 @@
 
             <!-- Begin Page Content -->
             <c:if test="${username1!=null}">
-                <div class="container-fluid">
+            <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Wallet: ${idWalletShow}</h1>
+                <!-- Page Heading -->
+                <h1 class="h3 mb-2 text-gray-800">Wallet: ${idWalletShow}</h1>
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Income</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-<%--                                    idGet,category,wallet,amount,time,type,description--%>
-                                    <tr>
-                                        <th>Category</th>
-                                        <th>Amount</th>
-                                        <th>Time</th>
-                                        <th>Transaction Type</th>
-                                        <th>description</th>
-                                    </tr>
-                                    </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th>Category</th>
-                                        <th>Amount</th>
-                                        <th>Time</th>
-                                        <th>Transaction Type</th>
-                                        <th>description</th>
-                                    </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    <c:forEach items='${bangThu}' var="transactionThu">
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Income</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered"  width="100%" cellspacing="0">
+                                <thead>
+                                    <%--                                    idGet,category,wallet,amount,time,type,description--%>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Amount</th>
+                                    <th>Time</th>
+                                    <th>Transaction Type</th>
+                                    <th>description</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Amount</th>
+                                    <th>Time</th>
+                                    <th>Transaction Type</th>
+                                    <th>description</th>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                <c:forEach items='${bangThu}' var="transactionThu">
                                     <tr>
                                         <td>${transactionThu.category.name}</td>
                                         <td>$ ${transactionThu.amount}</td>
                                         <td>${transactionThu.time}</td>
                                         <td>${transactionThu.type}</td>
                                         <td>${transactionThu.description}</td>
+                                        <td><a class="btn btn-primary" href="/home?action=deleteTranThu&idTran=${transactionThu.id}" >delete</a></td>
+                                        <td><a class="btn btn-primary" href="/home?action=editTran&idEdit=${transactionThu.id}" >edit</a></td>
                                     </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Expense</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <%--                                    idGet,category,wallet,amount,time,type,description--%>
-                                    <tr>
-                                        <th>Category</th>
-                                        <th>Amount</th>
-                                        <th>Time</th>
-                                        <th>Transaction Type</th>
-                                        <th>description</th>
-                                    </tr>
-                                    </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th>Category</th>
-                                        <th>Amount</th>
-                                        <th>Time</th>
-                                        <th>Transaction Type</th>
-                                        <th>description</th>
-                                    </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    <c:forEach items='${bangChi}' var="transactionChi">
-                                        <tr>
-                                            <td>${transactionChi.category.name}</td>
-                                            <td>$ ${transactionChi.amount}</td>
-                                            <td>${transactionChi.time}</td>
-                                            <td>${transactionChi.type}</td>
-                                            <td>${transactionChi.description}</td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
+                                </c:forEach>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-            </c:if>
-            <!-- End of Content Wrapper -->
 
-        </div>
-        <!-- End of Page Wrapper -->
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Expense</h6>
                     </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="/home?action=logout">Logout</a>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered"  width="100%" cellspacing="0">
+                                <thead>
+
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Amount</th>
+                                    <th>Time</th>
+                                    <th>Transaction Type</th>
+                                    <th>description</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Amount</th>
+                                    <th>Time</th>
+                                    <th>Transaction Type</th>
+                                    <th>description</th>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                <c:forEach items='${bangChi}' var="transactionChi">
+                                    <tr>
+                                        <td>${transactionChi.category.name}</td>
+                                        <td>$ ${transactionChi.amount}</td>
+                                        <td type="datetime-local">${transactionChi.time}</td>
+                                        <td>${transactionChi.type}</td>
+                                        <td>${transactionChi.description}</td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
+            </c:if>
         </div>
     </div>
+
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="/home?action=logout">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 </div>
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
