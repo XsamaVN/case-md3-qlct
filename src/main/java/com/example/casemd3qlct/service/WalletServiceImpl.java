@@ -18,19 +18,19 @@ public class WalletServiceImpl implements WalletService{
 
     @Override
     public List<Wallet> showAll(int id) {
-
+        walletList = new ArrayList<>();
         try (Connection connection = CreateConnector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from wallet where id = ?")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from wallet join user on idUser = user.id where user.id = ?")) {
             preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int idGet = rs.getInt("id");
                 int idUser = rs.getInt("idUser");
-                double currentBalance = rs.getDouble("current_balance");
-                double totalIncome = rs.getDouble("total_income");
-                double totalExpense = rs.getDouble("total_expense");
+                double totalIncome = getTotalIncomeById(idGet);
+                double totalExpense = getTotalExpenseById(idGet);
                 double initialBalance = rs.getDouble("initial_balance");
+                double currentBalance = initialBalance + totalIncome - totalExpense;
 
                 walletList.add(new Wallet(idGet, userService.findByid(idUser),currentBalance, totalIncome,totalExpense,initialBalance));
             }
@@ -125,10 +125,9 @@ public class WalletServiceImpl implements WalletService{
         Double totalIncome = null;
         try (Connection connection = CreateConnector.getConnection();
 
-             PreparedStatement preparedStatement = connection.prepareStatement("select sum(amount) as `totalExpense` from wallet " +
-                     " join transaction on idWallet = wallet.id " +
-                     " join user on idUser = user.id" +
-                     " where user.id = ? and type like `%thu%`")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select sum(amount) as `totalIncome` from wallet " +
+                     "join transaction on idwallet = wallet.id  " +
+                     "where wallet.id = ? and transaction_type like \"thu\"")) {
             preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
@@ -145,12 +144,9 @@ public class WalletServiceImpl implements WalletService{
         Double totalExpense = null;
         try (Connection connection = CreateConnector.getConnection();
 
-             PreparedStatement preparedStatement = connection.prepareStatement("select sum(amount) as `totalExpense` from wallet " +
-                                                                                    " join transaction on idWallet = wallet.id " +
-                                                                                    " join user on idUser = user.id" +
-                                                                                    " where user.id = ? and type like `%chi%` " +
-                                                                                    " group by idWallet " +
-                                                                                    " order by totalExpense")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select sum(amount) as `totalExpense` from wallet  \n" +
+                     "join transaction on idwallet = wallet.id  \n" +
+                     "where wallet.id = ? and transaction_type like \"chi\"")) {
             preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
@@ -161,9 +157,5 @@ public class WalletServiceImpl implements WalletService{
             System.out.println(e);
         }
         return totalExpense;
-    }
-
-    public Double getCurrentBalanceById(int id){
-        return getInitialBalanceById(id) + getTotalIncomeById(id) - getTotalExpenseById(id);
     }
 }

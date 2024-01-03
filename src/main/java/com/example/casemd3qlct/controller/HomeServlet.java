@@ -52,9 +52,7 @@ public class HomeServlet extends HttpServlet {
         List<Wallet> walletList = walletService.showAll(id);
         System.out.println(username);
         request.setAttribute("username", username);
-        request.setAttribute("initialBalance", walletService.getInitialBalanceById(LoginServlet.idUserLogin));
-        request.setAttribute("totalIncome", walletService.getTotalIncomeById(LoginServlet.idUserLogin));
-        request.setAttribute("totalExpense", walletService.getTotalExpenseById(LoginServlet.idUserLogin));
+        request.setAttribute("walletList",walletList);
         }
         requestDispatcher.forward(request,response);
 
