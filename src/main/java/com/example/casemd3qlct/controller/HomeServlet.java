@@ -1,6 +1,7 @@
 package com.example.casemd3qlct.controller;
 
 import com.example.casemd3qlct.model.Wallet;
+import com.example.casemd3qlct.service.TransactionServiceImpl;
 import com.example.casemd3qlct.service.UserServiceImpl;
 import com.example.casemd3qlct.service.WalletServiceImpl;
 
@@ -16,6 +17,7 @@ import javax.servlet.annotation.*;
 public class HomeServlet extends HttpServlet {
     UserServiceImpl userService = new UserServiceImpl();
     WalletServiceImpl walletService = new WalletServiceImpl();
+    TransactionServiceImpl transactionService = new TransactionServiceImpl();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
     String action = request.getParameter("action");
@@ -29,9 +31,28 @@ public class HomeServlet extends HttpServlet {
         case"logout":
             logouts(request,response);
             break;
+        case "showDetail":
+            showDetail(request,response);
+            break;
         default:
             showHomePage(request,response);
     }
+    }
+
+    private void showDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("walletDetail/list.jsp");
+        Integer id = LoginServlet.idUserLogin;
+        if(id != null){
+            String username = userService.findByid(LoginServlet.idUserLogin).getUsername();
+            System.out.println(username);
+            request.setAttribute("username1", username);
+            int idWallet = Integer.parseInt(request.getParameter("idWallet"));
+            request.setAttribute("idWalletShow",idWallet);
+            request.setAttribute("bangChi",transactionService.findTransactionListByWalletId(idWallet,"chi"));
+            request.setAttribute("bangThu",transactionService.findTransactionListByWalletId(idWallet,"thu"));
+        }
+
+        requestDispatcher.forward(request,response);
     }
 
     private void logouts(HttpServletRequest request, HttpServletResponse response) throws IOException {

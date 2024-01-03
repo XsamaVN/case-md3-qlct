@@ -1,27 +1,26 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: chiuchiuleuleu
+  Date: 02/01/2024
+  Time: 15:48
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Lê Phi Đức - Finance manager</title>
-
-    <!-- Custom fonts for this template-->
+    <title>Title</title>
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
 
-    <!-- Custom styles for this template-->
+    <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
-
 <body id="page-top">
 
 <!-- Page Wrapper -->
@@ -141,12 +140,12 @@
 
                     <!-- Nav Item - User Information -->
 
-                    <c:if test="${username!=null}">
+                    <c:if test="${username1!=null}">
                         <li class="nav-item dropdown no-arrow">
 
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${username}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${username1}</span>
                                 <img class="img-profile rounded-circle"
                                      src="img/undraw_profile.svg">
                             </a>
@@ -167,7 +166,7 @@
 
                         </li>
                     </c:if>
-                    <c:if test="${null==username}">
+                    <c:if test="${null==username1}">
                         <li class="nav-item">
                             <a class="nav-link" href="/login">
                                 <span>Login</span></a>
@@ -180,98 +179,97 @@
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
-            <c:if test="${username!=null}">
+            <c:if test="${username1!=null}">
                 <div class="container-fluid">
-                    <h1 class="h3 mb-0 text-gray-800">wallet</h1>
-                    <c:forEach items='${walletList}' var="wallet">
-                        <h2 class="h3 mb-0 text-gray-800">id: ${wallet.id}</h2>
-                        <div class="row">
-                            <!-- Earnings (Monthly) Card Example -->
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                    Current Balance
-                                                </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                    $ ${wallet.currentBalance}</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                    Total income
-                                                </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                    $ ${wallet.totalIncome}</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Wallet: ${idWalletShow}</h1>
 
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                    Total Expense
-                                                </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                    $ ${wallet.totalExpense}</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                    Initial Balance
-                                                </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                    $ ${wallet.initialBalance}</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="/home?action=showDetail&idWallet=${wallet.id} " class="btn btn-info btn-icon-split mb-3 ml-4">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-info-circle"></i>
-                                        </span>
-                                <span class="text">Wallet ${wallet.id} Detail</span>
-                            </a>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Income</h6>
                         </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+<%--                                    idGet,category,wallet,amount,time,type,description--%>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Amount</th>
+                                        <th>Time</th>
+                                        <th>Transaction Type</th>
+                                        <th>description</th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Amount</th>
+                                        <th>Time</th>
+                                        <th>Transaction Type</th>
+                                        <th>description</th>
+                                    </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    <c:forEach items='${bangThu}' var="transactionThu">
+                                    <tr>
+                                        <td>${transactionThu.category.name}</td>
+                                        <td>$ ${transactionThu.amount}</td>
+                                        <td>${transactionThu.time}</td>
+                                        <td>${transactionThu.type}</td>
+                                        <td>${transactionThu.description}</td>
+                                    </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
-                    </c:forEach>
-                    <!-- End of Main Content -->
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Expense</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <%--                                    idGet,category,wallet,amount,time,type,description--%>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Amount</th>
+                                        <th>Time</th>
+                                        <th>Transaction Type</th>
+                                        <th>description</th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Amount</th>
+                                        <th>Time</th>
+                                        <th>Transaction Type</th>
+                                        <th>description</th>
+                                    </tr>
+                                    </tfoot>
+                                    <tbody>
+                                    <c:forEach items='${bangChi}' var="transactionChi">
+                                        <tr>
+                                            <td>${transactionChi.category.name}</td>
+                                            <td>$ ${transactionChi.amount}</td>
+                                            <td>${transactionChi.time}</td>
+                                            <td>${transactionChi.type}</td>
+                                            <td>${transactionChi.description}</td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </c:if>
             <!-- End of Content Wrapper -->
@@ -316,12 +314,11 @@
 <script src="js/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
-<script src="vendor/chart.js/Chart.min.js"></script>
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="js/demo/chart-area-demo.js"></script>
-<script src="js/demo/chart-pie-demo.js"></script>
+<script src="js/demo/datatables-demo.js"></script>
 
 </body>
-
 </html>
