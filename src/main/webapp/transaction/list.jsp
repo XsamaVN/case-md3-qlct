@@ -184,7 +184,7 @@
 
                 <!-- Page Heading -->
                 <h1 class="h3 mb-2 text-gray-800">Wallet: ${idWalletShow}</h1>
-
+                <a class="btn btn-primary" href="/home?action=createTran" >ADD NEW</a>
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
@@ -194,7 +194,6 @@
                         <div class="table-responsive">
                             <table class="table table-bordered"  width="100%" cellspacing="0">
                                 <thead>
-                                    <%--                                    idGet,category,wallet,amount,time,type,description--%>
                                 <tr>
                                     <th>Category</th>
                                     <th>Amount</th>
@@ -265,6 +264,8 @@
                                         <td type="datetime-local">${transactionChi.time}</td>
                                         <td>${transactionChi.type}</td>
                                         <td>${transactionChi.description}</td>
+                                        <td><a class="btn btn-primary" href="/home?action=deleteTranThu&idTran=${transactionChi.id}" >delete</a></td>
+                                        <td><a class="btn btn-primary" href="/home?action=editTran&idEdit=${transactionChi.id}" >edit</a></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

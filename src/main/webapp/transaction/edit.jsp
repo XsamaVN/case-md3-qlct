@@ -190,19 +190,19 @@
                             <h3 class="h3 mb-2 text-gray-800">Edit transaction</h3>
                             <form method="post">
                                 <div class="form-group">
-                                    <p>id </p> <input type="text" name="id" value="${tranEdit.id}" class="form-control form-control-user" placeholder="abc">
+                                    <p>id </p> <input type="text" name="id" value="${tranEdit.id}" class="form-control form-control-user" placeholder="id">
                                 </div>
                                 <div class="form-group">
-                                    <p>id Category </p>  <input type="text" name="idCategory" value="${tranEdit.category.id}" class="form-control form-control-user" placeholder="abc">
+                                    <p>id Category </p>  <input type="text" name="idCategory" value="${tranEdit.category.id}" class="form-control form-control-user" placeholder="id Category">
                                 </div>
                                 <div class="form-group">
-                                    <p>id Wallet </p> <input type="text" name="idWalletTran" value="${tranEdit.wallet.id}" class="form-control form-control-user" placeholder="abc">
+                                    <p>id Wallet </p> <input disabled type="text" name="idWalletTran" value="${tranEdit.wallet.id}" class="form-control form-control-user" placeholder="id Wallet">
                                 </div>
                                 <div class="form-group">
-                                    <p>Amount </p><input type="text" name="amount" value="${tranEdit.amount}" class="form-control form-control-user" placeholder="abc">
+                                    <p>Amount </p><input type="text" name="amount" value="${tranEdit.amount}" class="form-control form-control-user" placeholder="Amount">
                                 </div>
                                 <div class="form-group">
-                                    <p>Time </p> <input type="datetime-local" name="time" value="${tranEdit.time}" class="form-control form-control-user" placeholder="abc">
+                                    <p>Time </p> <input type="datetime-local" name="time" value="${tranEdit.time}" class="form-control form-control-user" placeholder="Time">
                                 </div>
                                 <div class="form-group">
                                     <p>Type </p>
@@ -214,7 +214,7 @@
 
                                 <div class="form-group">
                                     <p>Description </p>
-                                    <input type="text" name="description" value="${tranEdit.description}" class="form-control form-control-user" placeholder="abc">
+                                    <input type="text" name="description" value="${tranEdit.description}" class="form-control form-control-user" placeholder="Description">
                                 </div>
                                 <button class="btn btn-primary mb-2">Submit</button>
                             </form>
