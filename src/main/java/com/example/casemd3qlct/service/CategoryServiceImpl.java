@@ -18,6 +18,7 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public List<Category> showAll(int id) {
+        categoryList = new ArrayList<>();
         try (Connection connection = CreateConnector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from category where id = ?")) {
             preparedStatement.setInt(1, id);
@@ -100,5 +101,20 @@ public class CategoryServiceImpl implements CategoryService{
             }
         }
         return index;
+    }
+    public List<Category> getCategoryList() {
+        try (Connection connection = CreateConnector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from category")) {
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int idGet = rs.getInt("id");
+                String name = rs.getString("name");
+                categoryList.add(new Category(idGet,name));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return categoryList;
     }
 }

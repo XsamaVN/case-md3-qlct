@@ -1,5 +1,6 @@
 package com.example.casemd3qlct.controller;
 
+import com.example.casemd3qlct.model.Category;
 import com.example.casemd3qlct.model.Transaction;
 import com.example.casemd3qlct.model.Wallet;
 import com.example.casemd3qlct.service.CategoryServiceImpl;
@@ -9,6 +10,7 @@ import com.example.casemd3qlct.service.WalletServiceImpl;
 
 import java.io.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,8 +31,8 @@ public class HomeServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-            case "showListWallet":
-                showListWallet(request, response);
+            case "showCategoryList":
+                showCategoryList(request, response);
                 break;
             case "logout":
                 logouts(request, response);
@@ -50,6 +52,21 @@ public class HomeServlet extends HttpServlet {
             default:
                 showHomePage(request, response);
         }
+    }
+
+    private void showCategoryList(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("category/list.jsp");
+        Integer id = LoginServlet.idUserLogin;
+        if (id != null) {
+            String username = userService.findByid(LoginServlet.idUserLogin).getUsername();
+            System.out.println(username);
+            request.setAttribute("username1", username);
+            request.setAttribute("idWalletShow", idWallet);
+            List<Category> categoryList = new ArrayList<>(categoryService.getCategoryList());
+            request.setAttribute("categoryList",categoryList);
+
+        }
+        requestDispatcher.forward(request, response);
     }
 
     private void showFormCreateTran(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -107,9 +124,6 @@ public class HomeServlet extends HttpServlet {
         response.sendRedirect("/login");
     }
 
-    private void showListWallet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.sendRedirect("/wallet");
-    }
 
     private void showHomePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/home.jsp");
