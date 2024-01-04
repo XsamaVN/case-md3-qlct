@@ -202,30 +202,11 @@
           <!-- Page Heading -->
           <div class="row">
             <div class="offset-2"></div>
-            <div class="col-8">
-              <h1 class="h3 mb-2 text-gray-800">Wallet: ${idWalletShow}</h1>
-              <h3 class="h3 mb-2 text-gray-800">Add new transaction</h3>
+            <div class="col-6">
+              <h3 class="h3 mb-2 text-gray-800">Add new wallet</h3>
               <form method="post">
                 <div class="form-group">
-                  <p>id Category </p>  <input type="text" name="idCategory"  class="form-control form-control-user" placeholder="id Category">
-                </div>
-                <div class="form-group">
-                  <p>Amount </p><input type="text" name="amount"  class="form-control form-control-user" placeholder="Amount">
-                </div>
-                <div class="form-group">
-                  <p>Time </p> <input type="datetime-local" name="time"  class="form-control form-control-user" placeholder="Time">
-                </div>
-                <div class="form-group">
-                  <p>Type </p>
-                  <select name="type" class="custom-select" required>
-                    <option  value="thu">thu</option>
-                    <option  value="chi">chi</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <p>Description </p>
-                  <input type="text" name="description"  class="form-control form-control-user" placeholder="Description">
+                  <p>Initial Balance </p> <input type="number" name="initial"  class="form-control form-control-user" placeholder="Initial Balance">
                 </div>
                 <button class="btn btn-primary mb-2">ADD</button>
               </form>
@@ -265,8 +246,6 @@
       </div>
     </div>
   </div>
-</div>
-</div>
 </div>
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>

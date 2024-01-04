@@ -31,6 +31,12 @@ public class HomeServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
+            case "editWallet":
+                showEditWalletForm(request,response);
+                break;
+            case"createWallet":
+                showCreateWalletForm(request,response);
+                break;
             case "showCategoryList":
                 showCategoryList(request, response);
                 break;
@@ -61,6 +67,32 @@ public class HomeServlet extends HttpServlet {
             default:
                 showHomePage(request, response);
         }
+    }
+
+    private void showEditWalletForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("wallet/edit.jsp");
+        Integer id = LoginServlet.idUserLogin;
+        if (id != null) {
+            String username = userService.findByid(LoginServlet.idUserLogin).getUsername();
+            System.out.println(username);
+            request.setAttribute("username1", username);
+            int idEdit = Integer.parseInt(request.getParameter("idEdit"));
+            request.setAttribute("editWallet", walletService.findByid(idEdit));
+
+        }
+        requestDispatcher.forward(request, response);
+    }
+
+    private void showCreateWalletForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("wallet/create.jsp");
+        Integer id = LoginServlet.idUserLogin;
+        if (id != null) {
+            String username = userService.findByid(LoginServlet.idUserLogin).getUsername();
+            System.out.println(username);
+            request.setAttribute("username1", username);
+
+        }
+        requestDispatcher.forward(request, response);
     }
 
     private void deleteCategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -192,6 +224,12 @@ public class HomeServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
+            case "editWallet":
+                EditWallet(request,response);
+                break;
+            case"createWallet":
+                CreateWallet(request,response);
+                break;
             case "editTran":
                 editTranPost(request,response);
                 break;
@@ -205,6 +243,21 @@ public class HomeServlet extends HttpServlet {
                 editCategory(request,response);
                 break;
         }
+    }
+
+    private void EditWallet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int idEdit = Integer.parseInt(request.getParameter("idEdit"));
+        double initialBalance = Double.parseDouble(request.getParameter("initial"));
+        Wallet wallet =new Wallet(idEdit, initialBalance);
+        walletService.edit(idEdit,wallet);
+        response.sendRedirect("/home");
+    }
+
+    private void CreateWallet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        double initialBalance = Double.parseDouble(request.getParameter("initial"));
+        Wallet wallet = new Wallet(userService.findByid(LoginServlet.idUserLogin),initialBalance);
+        walletService.create(wallet);
+        response.sendRedirect("/home");
     }
 
     private void editCategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
