@@ -1,5 +1,7 @@
 package com.example.casemd3qlct.service;
+
 import com.example.casemd3qlct.model.Wallet;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,9 +10,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class WalletServiceImpl implements WalletService{
+public class WalletServiceImpl implements WalletService {
     List<Wallet> walletList;
-    UserServiceImpl userService =new UserServiceImpl();
+    UserServiceImpl userService = new UserServiceImpl();
 
     public WalletServiceImpl() {
         walletList = new ArrayList<>();
@@ -32,7 +34,7 @@ public class WalletServiceImpl implements WalletService{
                 double initialBalance = rs.getDouble("initial_balance");
                 double currentBalance = initialBalance + totalIncome - totalExpense;
 
-                walletList.add(new Wallet(idGet, userService.findByid(idUser),currentBalance, totalIncome,totalExpense,initialBalance));
+                walletList.add(new Wallet(idGet, userService.findByid(idUser), currentBalance, totalIncome, totalExpense, initialBalance));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -65,8 +67,6 @@ public class WalletServiceImpl implements WalletService{
 
     @Override
     public void delete(int id) {
-        int indexOf = findIndexById(id);
-        walletList.remove(indexOf);
         try (Connection connection = CreateConnector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM wallet WHERE id = " + id)) {
             System.out.println(preparedStatement);
@@ -91,7 +91,7 @@ public class WalletServiceImpl implements WalletService{
                 double totalExpense = rs.getDouble("total_expense");
                 double initialBalance = rs.getDouble("initial_balance");
 
-                wallet = new Wallet(idWallet,userService.findByid(idUser),currentBalance,totalIncome,totalExpense,initialBalance);
+                wallet = new Wallet(idWallet, userService.findByid(idUser), currentBalance, totalIncome, totalExpense, initialBalance);
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -99,29 +99,8 @@ public class WalletServiceImpl implements WalletService{
         return wallet;
     }
 
-    @Override
-    public int findIndexById(int id) {
-        int index = -1;
-        for (int i = 0; i < walletList.size(); i++) {
-            if (walletList.get(i).getId() == id) {
-                index = i;
-            }
-        }
-        return index;
-    }
 
-    public Double getInitialBalanceById(int id){
-        int indexOf = findIndexById(id);
-
-        if(indexOf!=-1){
-            return walletList.get(indexOf).getInitialBalance();
-        }
-        else {
-            return null;
-        }
-    }
-
-    public Double getTotalIncomeById(int id){
+    public Double getTotalIncomeById(int id) {
         Double totalIncome = null;
         try (Connection connection = CreateConnector.getConnection();
 
@@ -137,10 +116,10 @@ public class WalletServiceImpl implements WalletService{
         } catch (SQLException e) {
             System.out.println(e);
         }
-       return totalIncome;
+        return totalIncome;
     }
 
-    public Double getTotalExpenseById(int id){
+    public Double getTotalExpenseById(int id) {
         Double totalExpense = null;
         try (Connection connection = CreateConnector.getConnection();
 

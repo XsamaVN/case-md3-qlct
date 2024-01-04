@@ -34,6 +34,15 @@ public class HomeServlet extends HttpServlet {
             case "showCategoryList":
                 showCategoryList(request, response);
                 break;
+            case "createCategory":
+                showCreateCategoryForm(request,response);
+                break;
+            case "editCategory":
+                showEditCategoryForm(request,response);
+                break;
+            case "deleteCategory":
+                deleteCategory(request,response);
+                break;
             case "logout":
                 logouts(request, response);
                 break;
@@ -52,6 +61,43 @@ public class HomeServlet extends HttpServlet {
             default:
                 showHomePage(request, response);
         }
+    }
+
+    private void deleteCategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Integer id = LoginServlet.idUserLogin;
+        if (id != null) {
+            String username = userService.findByid(LoginServlet.idUserLogin).getUsername();
+            System.out.println(username);
+            request.setAttribute("username1", username);
+            int id1 = Integer.parseInt(request.getParameter("id"));
+            categoryService.delete(id1);
+            response.sendRedirect("/home?action=showCategoryList");
+        }
+    }
+
+    private void showEditCategoryForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("category/edit.jsp");
+        Integer id = LoginServlet.idUserLogin;
+        if (id != null) {
+            String username = userService.findByid(LoginServlet.idUserLogin).getUsername();
+            System.out.println(username);
+            request.setAttribute("username1", username);
+            int id1 = Integer.parseInt(request.getParameter("id"));
+            request.setAttribute("categoryEdit", categoryService.findByid(id1));
+        }
+        requestDispatcher.forward(request, response);
+    }
+
+    private void showCreateCategoryForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("category/create.jsp");
+        Integer id = LoginServlet.idUserLogin;
+        if (id != null) {
+            String username = userService.findByid(LoginServlet.idUserLogin).getUsername();
+            System.out.println(username);
+            request.setAttribute("username1", username);
+
+        }
+        requestDispatcher.forward(request, response);
     }
 
     private void showCategoryList(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -152,7 +198,29 @@ public class HomeServlet extends HttpServlet {
             case "createTran":
                 createTran(request,response);
                 break;
+            case "createCategory":
+                createCategory(request,response);
+                break;
+            case "editCategory":
+                editCategory(request,response);
+                break;
         }
+    }
+
+    private void editCategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id1 = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        Category category = new Category(name);
+        categoryService.edit(id1, category);
+        response.sendRedirect("/home?action=showCategoryList");
+    }
+
+    private void createCategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        String name = request.getParameter("name");
+        Category category = new Category(name);
+        categoryService.create( category);
+        response.sendRedirect("/home?action=showCategoryList");
     }
 
     private void createTran(HttpServletRequest request, HttpServletResponse response) throws IOException {

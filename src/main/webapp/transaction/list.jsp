@@ -200,102 +200,245 @@
                     <h1 class="h3 mb-2 text-gray-800">Wallet: ${idWalletShow}</h1>
                     <a class="btn btn-primary mb-4" href="/home?action=createTran">ADD NEW TRANSACTION</a>
                     <!-- DataTales Example -->
+<%--                    bang thu--%>
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Income</h6>
-                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" width="100%" cellspacing="0">
-                                    <thead>
-                                    <tr>
-                                        <th>Category</th>
-                                        <th>Amount</th>
-                                        <th>Time</th>
-                                        <th>Transaction Type</th>
-                                        <th>description</th>
-                                    </tr>
-                                    </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th>Category</th>
-                                        <th>Amount</th>
-                                        <th>Time</th>
-                                        <th>Transaction Type</th>
-                                        <th>description</th>
-                                    </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    <c:forEach items='${bangThu}' var="transactionThu">
-                                        <tr>
-                                            <td>${transactionThu.category.name}</td>
-                                            <td>$ ${transactionThu.amount}</td>
-                                            <td>${transactionThu.time}</td>
-                                            <td>${transactionThu.type}</td>
-                                            <td>${transactionThu.description}</td>
-                                            <td><a class="btn btn-primary"
-                                                   href="/home?action=deleteTranThu&idTran=${transactionThu.id}">delete</a>
-                                            </td>
-                                            <td><a class="btn btn-primary"
-                                                   href="/home?action=editTran&idEdit=${transactionThu.id}">edit</a>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_length" id="dataTable_length"><label>Show <select
+                                                    name="dataTable_length" aria-controls="dataTable"
+                                                    class="custom-select custom-select-sm form-control form-control-sm">
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select> entries</label></div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <div id="dataTable_filter" class="dataTables_filter"><label>Search:<input
+                                                    type="search" class="form-control form-control-sm" placeholder=""
+                                                    aria-controls="dataTable"></label></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                                   cellspacing="0" role="grid" aria-describedby="dataTable_info"
+                                                   style="width: 100%;">
+                                                <thead>
+                                                <tr role="row">
+                                                    <th class="sorting sorting_asc" tabindex="0"
+                                                        aria-controls="dataTable" rowspan="1" colspan="1"
+                                                        aria-sort="ascending"
+                                                        aria-label="Name: activate to sort column descending"
+                                                        style="width: 200px;">Category
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Position: activate to sort column ascending"
+                                                        style="width: 200px;">Amount
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Office: activate to sort column ascending"
+                                                        style="width: 200px;">Time
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Age: activate to sort column ascending"
+                                                        style="width: 200px;">Transaction Type
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Start date: activate to sort column ascending"
+                                                        style="width: 200px;">description
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tfoot>
+                                                <tr>
+                                                    <th rowspan="1" colspan="1">Category</th>
+                                                    <th rowspan="1" colspan="1">Amount</th>
+                                                    <th rowspan="1" colspan="1">Time</th>
+                                                    <th rowspan="1" colspan="1">Transaction Type</th>
+                                                    <th rowspan="1" colspan="1">description</th>
+                                                </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                <c:forEach items='${bangThu}' var="transactionThu">
+                                                    <tr class="odd">
+                                                        <td>${transactionThu.category.name}</td>
+                                                        <td>$ ${transactionThu.amount}</td>
+                                                        <td>${transactionThu.time}</td>
+                                                        <td>${transactionThu.type}</td>
+                                                        <td>${transactionThu.description}</td>
+                                                        <td><a class="btn btn-primary"
+                                                               href="/home?action=deleteTranThu&idTran=${transactionThu.id}">delete</a>
+                                                        </td>
+                                                        <td><a class="btn btn-primary"
+                                                               href="/home?action=editTran&idEdit=${transactionThu.id}">edit</a>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-5">
+                                            <div class="dataTables_info" id="dataTable_info" role="status"
+                                                 aria-live="polite">Showing 1 to 1 of 1 entries
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="dataTables_paginate paging_simple_numbers"
+                                                 id="dataTable_paginate">
+                                                <ul class="pagination">
+                                                    <li class="paginate_button page-item previous disabled"
+                                                        id="dataTable_previous"><a href="#" aria-controls="dataTable"
+                                                                                   data-dt-idx="0" tabindex="0"
+                                                                                   class="page-link">Previous</a></li>
+                                                    <li class="paginate_button page-item active"><a href="#"
+                                                                                                    aria-controls="dataTable"
+                                                                                                    data-dt-idx="1"
+                                                                                                    tabindex="0"
+                                                                                                    class="page-link">1</a>
+                                                    </li>
+                                                    <li class="paginate_button page-item next disabled"
+                                                        id="dataTable_next"><a href="#" aria-controls="dataTable"
+                                                                               data-dt-idx="2" tabindex="0"
+                                                                               class="page-link">Next</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
 
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Expense</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" width="100%" cellspacing="0">
-                                    <thead>
-
-                                    <tr>
-                                        <th>Category</th>
-                                        <th>Amount</th>
-                                        <th>Time</th>
-                                        <th>Transaction Type</th>
-                                        <th>description</th>
-                                    </tr>
-                                    </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th>Category</th>
-                                        <th>Amount</th>
-                                        <th>Time</th>
-                                        <th>Transaction Type</th>
-                                        <th>description</th>
-                                    </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    <c:forEach items='${bangChi}' var="transactionChi">
-                                        <tr>
-                                            <td>${transactionChi.category.name}</td>
-                                            <td>$ ${transactionChi.amount}</td>
-                                            <td type="datetime-local">${transactionChi.time}</td>
-                                            <td>${transactionChi.type}</td>
-                                            <td>${transactionChi.description}</td>
-                                            <td><a class="btn btn-primary"
-                                                   href="/home?action=deleteTranThu&idTran=${transactionChi.id}">delete</a>
-                                            </td>
-                                            <td><a class="btn btn-primary"
-                                                   href="/home?action=editTran&idEdit=${transactionChi.id}">edit</a>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
+<%--                            Bangchi--%>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <div id="dataTable_wrapper1" class="dataTables_wrapper dt-bootstrap4">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-6">
+                                                <div class="dataTables_length" id="dataTable_length1"><label>Show <select
+                                                        name="dataTable_length" aria-controls="dataTable"
+                                                        class="custom-select custom-select-sm form-control form-control-sm">
+                                                    <option value="10">10</option>
+                                                    <option value="25">25</option>
+                                                    <option value="50">50</option>
+                                                    <option value="100">100</option>
+                                                </select> entries</label></div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <div id="dataTable_filter1" class="dataTables_filter"><label>Search:<input
+                                                        type="search" class="form-control form-control-sm" placeholder=""
+                                                        aria-controls="dataTable"></label></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <table class="table table-bordered dataTable" id="dataTable1" width="100%"
+                                                       cellspacing="0" role="grid" aria-describedby="dataTable_info"
+                                                       style="width: 100%;">
+                                                    <thead>
+                                                    <tr role="row">
+                                                        <th class="sorting sorting_asc" tabindex="0"
+                                                            aria-controls="dataTable" rowspan="1" colspan="1"
+                                                            aria-sort="ascending"
+                                                            aria-label="Name: activate to sort column descending"
+                                                            style="width: 200px;">Category
+                                                        </th>
+                                                        <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Position: activate to sort column ascending"
+                                                            style="width: 200px;">Amount
+                                                        </th>
+                                                        <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Office: activate to sort column ascending"
+                                                            style="width: 200px;">Time
+                                                        </th>
+                                                        <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Age: activate to sort column ascending"
+                                                            style="width: 200px;">Transaction Type
+                                                        </th>
+                                                        <th class="sorting" tabindex="0" aria-controls="dataTable"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Start date: activate to sort column ascending"
+                                                            style="width: 200px;">description
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                                    <tr>
+                                                        <th rowspan="1" colspan="1">Category</th>
+                                                        <th rowspan="1" colspan="1">Amount</th>
+                                                        <th rowspan="1" colspan="1">Time</th>
+                                                        <th rowspan="1" colspan="1">Transaction Type</th>
+                                                        <th rowspan="1" colspan="1">description</th>
+                                                    </tr>
+                                                    </tfoot>
+                                                    <tbody>
+                                                    <c:forEach items='${bangChi}' var="transactionChi">
+                                                        <tr class="odd">
+                                                            <td>${transactionChi.category.name}</td>
+                                                            <td>$ ${transactionChi.amount}</td>
+                                                            <td>${transactionChi.time}</td>
+                                                            <td>${transactionChi.type}</td>
+                                                            <td>${transactionChi.description}</td>
+                                                            <td><a class="btn btn-primary"
+                                                                   href="/home?action=deleteTranThu&idTran=${transactionChi.id}">delete</a>
+                                                            </td>
+                                                            <td><a class="btn btn-primary"
+                                                                   href="/home?action=editTran&idEdit=${transactionChi.id}">edit</a>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-5">
+                                                <div class="dataTables_info" id="dataTable_info1" role="status"
+                                                     aria-live="polite">Showing 1 to 1 of 1 entries
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-7">
+                                                <div class="dataTables_paginate paging_simple_numbers"
+                                                     id="dataTable_paginate1">
+                                                    <ul class="pagination">
+                                                        <li class="paginate_button page-item previous disabled"
+                                                            id="dataTable_previous1"><a href="#" aria-controls="dataTable"
+                                                                                       data-dt-idx="0" tabindex="0"
+                                                                                       class="page-link">Previous</a></li>
+                                                        <li class="paginate_button page-item active"><a href="#"
+                                                                                                        aria-controls="dataTable"
+                                                                                                        data-dt-idx="1"
+                                                                                                        tabindex="0"
+                                                                                                        class="page-link">1</a>
+                                                        </li>
+                                                        <li class="paginate_button page-item next disabled"
+                                                            id="dataTable_next1"><a href="#" aria-controls="dataTable"
+                                                                                   data-dt-idx="2" tabindex="0"
+                                                                                   class="page-link">Next</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
-                    </div>
-                </div>
             </c:if>
         </div>
     </div>

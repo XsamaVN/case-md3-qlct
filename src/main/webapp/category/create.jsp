@@ -197,46 +197,21 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
+                    <div class="row">
+                        <div class="offset-2"></div>
+                        <div class="col-8">
+                            <h1 class="h3 mb-2 text-gray-800">Wallet: ${idWalletShow}</h1>
+                            <h3 class="h3 mb-2 text-gray-800">Add new transaction</h3>
+                            <form method="post">
+                                <div class="form-group">
+                                    <p>Name Category</p>  <input type="text" name="name"  class="form-control form-control-user" placeholder="Name Category">
+                                </div>
 
-                    <a class="btn btn-primary mb-4" href="/home?action=createCategory">ADD NEW CATEGORY</a>
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">CATEGORY</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" width="100%" cellspacing="0">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>NAME</th>
-                                    </tr>
-                                    </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>NAME</th>
-                                    </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    <c:forEach items='${categoryList}' var="category">
-                                        <tr>
-                                            <td>${category.id}</td>
-                                            <td>${category.name}</td>
-                                            <td><a class="btn btn-primary"
-                                                   href="/home?action=deleteCategory&id=${category.id}">delete</a>
-                                            </td>
-                                            <td><a class="btn btn-primary"
-                                                   href="/home?action=editCategory&id=${category.id}">edit</a>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
+                                <button class="btn btn-primary mb-2">ADD</button>
+                            </form>
                         </div>
                     </div>
+
                 </div>
             </c:if>
         </div>
@@ -271,7 +246,8 @@
         </div>
     </div>
 </div>
-
+</div>
+</div>
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

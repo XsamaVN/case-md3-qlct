@@ -64,8 +64,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(int id) {
-        int indexOf = findIndexById(id);
-        userList.remove(indexOf);
         try (Connection connection = CreateConnector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM user WHERE id = " + id)) {
             System.out.println(preparedStatement);
@@ -93,16 +91,7 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    @Override
-    public int findIndexById(int id) {
-        int index = -1;
-        for (int i = 0; i < userList.size(); i++) {
-            if (userList.get(i).getId() == id) {
-                index = i;
-            }
-        }
-        return index;
-    }
+
     public List<User> getUserList() {
         try (Connection connection = CreateConnector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from user")) {
