@@ -111,4 +111,17 @@ public class CategoryServiceImpl implements CategoryService{
         }
         return categoryList;
     }
+    public void delete(int id, int idUser) {
+        try (Connection connection = CreateConnector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM transaction where idCategory = ? and idWalet = ?; DELETE FROM category WHERE id = ?")) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(2, idUser);
+            preparedStatement.setInt(3, id);
+            System.out.println(preparedStatement);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 }
