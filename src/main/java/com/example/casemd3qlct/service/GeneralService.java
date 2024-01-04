@@ -8,5 +8,4 @@ public interface GeneralService<T> {
     void edit(int id, T t);
     void delete(int id);
     T findByid(int id);
-    int findIndexById(int id);
 }

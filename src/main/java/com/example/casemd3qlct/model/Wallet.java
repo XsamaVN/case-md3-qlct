@@ -28,6 +28,16 @@ public class Wallet {
         this.initialBalance = initialBalance;
     }
 
+    public Wallet(User user, double initialBalance) {
+        this.user = user;
+        this.initialBalance = initialBalance;
+    }
+
+    public Wallet(int id, double initialBalance) {
+        this.id = id;
+        this.initialBalance = initialBalance;
+    }
+
     public int getId() {
         return id;
     }

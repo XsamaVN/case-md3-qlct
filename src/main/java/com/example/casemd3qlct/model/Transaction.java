@@ -1,19 +1,18 @@
 package com.example.casemd3qlct.model;
-import java.time.LocalDateTime;
 
 public class Transaction {
     private int id;
     private Category category;
     private Wallet wallet;
     private double amount;
-    private LocalDateTime time;
+    private String time;
     private String type;
     private String description;
 
     public Transaction() {
     }
 
-    public Transaction(int id, Category category, Wallet wallet, double amount, LocalDateTime time, String type, String description) {
+    public Transaction(int id, Category category, Wallet wallet, double amount, String time, String type, String description) {
         this.id = id;
         this.category = category;
         this.wallet = wallet;
@@ -23,7 +22,7 @@ public class Transaction {
         this.description = description;
     }
 
-    public Transaction(Category category, Wallet wallet, double amount, LocalDateTime time, String type, String description) {
+    public Transaction(Category category, Wallet wallet, double amount, String time, String type, String description) {
         this.category = category;
         this.wallet = wallet;
         this.amount = amount;
@@ -64,11 +63,11 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public LocalDateTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

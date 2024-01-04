@@ -1,5 +1,7 @@
 package com.example.casemd3qlct.service;
+
 import com.example.casemd3qlct.model.Wallet;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,19 +20,19 @@ public class WalletServiceImpl implements WalletService {
 
     @Override
     public List<Wallet> showAll(int id) {
-
+        walletList = new ArrayList<>();
         try (Connection connection = CreateConnector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from wallet where id = ?")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from wallet join user on idUser = user.id where user.id = ?")) {
             preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 int idGet = rs.getInt("id");
                 int idUser = rs.getInt("idUser");
-                double currentBalance = rs.getDouble("current_balance");
-                double totalIncome = rs.getDouble("total_income");
-                double totalExpense = rs.getDouble("total_expense");
+                double totalIncome = getTotalIncomeById(idGet);
+                double totalExpense = getTotalExpenseById(idGet);
                 double initialBalance = rs.getDouble("initial_balance");
+                double currentBalance = initialBalance + totalIncome - totalExpense;
 
                 walletList.add(new Wallet(idGet, userService.findByid(idUser), currentBalance, totalIncome, totalExpense, initialBalance));
             }
@@ -43,13 +45,9 @@ public class WalletServiceImpl implements WalletService {
     @Override
     public void create(Wallet wallet) {
         try (Connection connection = CreateConnector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("insert into wallet(idUser, currentBalance, totalIncome, totalExpense,initialBalance) values (?,?,?,?,?,?);")) {
-
-            preparedStatement.setInt(1, wallet.getUser().getId());
-            preparedStatement.setDouble(2, wallet.getCurrentBalance());
-            preparedStatement.setDouble(3, wallet.getTotalIncome());
-            preparedStatement.setDouble(4, wallet.getTotalExpense());
-            preparedStatement.setDouble(5, wallet.getInitialBalance());
+             PreparedStatement preparedStatement = connection.prepareStatement("insert into wallet(idUser, initial_balance) values (?,?);")) {
+            preparedStatement.setDouble(1, wallet.getUser().getId());
+            preparedStatement.setDouble(2, wallet.getInitialBalance());
 
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
@@ -60,16 +58,20 @@ public class WalletServiceImpl implements WalletService {
 
     @Override
     public void edit(int id, Wallet wallet) {
-
+        try (Connection connection = CreateConnector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE wallet SET initial_balance = ? WHERE id = ?")) {
+            preparedStatement.setDouble(1, wallet.getInitialBalance());
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 
     @Override
     public void delete(int id) {
-        int indexOf = findIndexById(id);
-        walletList.remove(indexOf);
         try (Connection connection = CreateConnector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM wallet WHERE id = ?")) {
-            preparedStatement.setInt(1, id);
+             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM wallet WHERE id = " + id)) {
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -100,35 +102,14 @@ public class WalletServiceImpl implements WalletService {
         return wallet;
     }
 
-    @Override
-    public int findIndexById(int id) {
-        int index = -1;
-        for (int i = 0; i < walletList.size(); i++) {
-            if (walletList.get(i).getId() == id) {
-                index = i;
-            }
-        }
-        return index;
-    }
-
-    public Double getInitialBalanceById(int id) {
-        int indexOf = findIndexById(id);
-
-        if (indexOf != -1) {
-            return walletList.get(indexOf).getInitialBalance();
-        } else {
-            return null;
-        }
-    }
 
     public Double getTotalIncomeById(int id) {
         Double totalIncome = null;
         try (Connection connection = CreateConnector.getConnection();
 
-             PreparedStatement preparedStatement = connection.prepareStatement("select sum(amount) as `totalExpense` from wallet " +
-                     " join transaction on idWallet = wallet.id " +
-                     " join user on idUser = user.id" +
-                     " where user.id = ? and type like `%thu%`")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select sum(amount) as `totalIncome` from wallet " +
+                     "join transaction on idwallet = wallet.id  " +
+                     "where wallet.id = ? and transaction_type like \"thu\"")) {
             preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
@@ -145,12 +126,9 @@ public class WalletServiceImpl implements WalletService {
         Double totalExpense = null;
         try (Connection connection = CreateConnector.getConnection();
 
-             PreparedStatement preparedStatement = connection.prepareStatement("select sum(amount) as `totalExpense` from wallet " +
-                     " join transaction on idWallet = wallet.id " +
-                     " join user on idUser = user.id" +
-                     " where user.id = ? and type like `%chi%` " +
-                     " group by idWallet " +
-                     " order by totalExpense")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select sum(amount) as `totalExpense` from wallet  \n" +
+                     "join transaction on idwallet = wallet.id  \n" +
+                     "where wallet.id = ? and transaction_type like \"chi\"")) {
             preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
@@ -162,11 +140,5 @@ public class WalletServiceImpl implements WalletService {
         }
         return totalExpense;
     }
-
-    public Double getCurrentBalanceById(int id) {
-        return getInitialBalanceById(id) + getTotalIncomeById(id) - getTotalExpenseById(id);
-    }
-
-
 
 }

@@ -18,6 +18,7 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public List<Category> showAll(int id) {
+        categoryList = new ArrayList<>();
         try (Connection connection = CreateConnector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from category where id = ?")) {
             preparedStatement.setInt(1, id);
@@ -37,8 +38,7 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public void create(Category category) {
         try (Connection connection = CreateConnector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("insert into category(name) values (?);")) {
-
+             PreparedStatement preparedStatement = connection.prepareStatement("insert into category(name) values (?)")) {
             preparedStatement.setString(1, category.getName());
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
@@ -50,9 +50,10 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public void edit(int id, Category category) {
         try (Connection connection = CreateConnector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE category SET name values (?) WHERE id = " + id)) {
+             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE category SET name = ? WHERE id = ?")) {
 
             preparedStatement.setString(1, category.getName());
+            preparedStatement.setInt(2, id);
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -62,11 +63,13 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public void delete(int id) {
-        int indexOf = findIndexById(id);
-        categoryList.remove(indexOf);
         try (Connection connection = CreateConnector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM category WHERE id = " + id)) {
+             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM transaction where idCategory = ? and idWalet = ?; DELETE FROM category WHERE id = ?")) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(2, id);
+            preparedStatement.setInt(3, id);
             System.out.println(preparedStatement);
+
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -91,14 +94,34 @@ public class CategoryServiceImpl implements CategoryService{
         return category;
     }
 
-    @Override
-    public int findIndexById(int id) {
-        int index = -1;
-        for (int i = 0; i < categoryList.size(); i++) {
-            if (categoryList.get(i).getId() == id) {
-                index = i;
+
+    public List<Category> getCategoryList() {
+        categoryList = new ArrayList<>();
+        try (Connection connection = CreateConnector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from category")) {
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int idGet = rs.getInt("id");
+                String name = rs.getString("name");
+                categoryList.add(new Category(idGet,name));
             }
+        } catch (SQLException e) {
+            System.out.println(e);
         }
-        return index;
+        return categoryList;
+    }
+    public void delete(int id, int idUser) {
+        try (Connection connection = CreateConnector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM transaction where idCategory = ? and idWalet = ?; DELETE FROM category WHERE id = ?")) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(2, idUser);
+            preparedStatement.setInt(3, id);
+            System.out.println(preparedStatement);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 }

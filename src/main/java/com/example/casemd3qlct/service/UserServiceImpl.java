@@ -92,17 +92,9 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    @Override
-    public int findIndexById(int id) {
-        int index = -1;
-        for (int i = 0; i < userList.size(); i++) {
-            if (userList.get(i).getId() == id) {
-                index = i;
-            }
-        }
-        return index;
-    }
+
     public List<User> getUserList() {
+        userList = new ArrayList<>();
         try (Connection connection = CreateConnector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from user")) {
             System.out.println(preparedStatement);
