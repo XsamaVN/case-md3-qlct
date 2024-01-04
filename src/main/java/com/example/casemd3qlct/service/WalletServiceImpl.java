@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class WalletServiceImpl implements WalletService{
+public class WalletServiceImpl implements WalletService {
     List<Wallet> walletList;
-    UserServiceImpl userService =new UserServiceImpl();
+    UserServiceImpl userService = new UserServiceImpl();
 
     public WalletServiceImpl() {
         walletList = new ArrayList<>();
@@ -32,7 +32,7 @@ public class WalletServiceImpl implements WalletService{
                 double totalExpense = rs.getDouble("total_expense");
                 double initialBalance = rs.getDouble("initial_balance");
 
-                walletList.add(new Wallet(idGet, userService.findByid(idUser),currentBalance, totalIncome,totalExpense,initialBalance));
+                walletList.add(new Wallet(idGet, userService.findByid(idUser), currentBalance, totalIncome, totalExpense, initialBalance));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -68,7 +68,8 @@ public class WalletServiceImpl implements WalletService{
         int indexOf = findIndexById(id);
         walletList.remove(indexOf);
         try (Connection connection = CreateConnector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM wallet WHERE id = " + id)) {
+             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM wallet WHERE id = ?")) {
+            preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -91,7 +92,7 @@ public class WalletServiceImpl implements WalletService{
                 double totalExpense = rs.getDouble("total_expense");
                 double initialBalance = rs.getDouble("initial_balance");
 
-                wallet = new Wallet(idWallet,userService.findByid(idUser),currentBalance,totalIncome,totalExpense,initialBalance);
+                wallet = new Wallet(idWallet, userService.findByid(idUser), currentBalance, totalIncome, totalExpense, initialBalance);
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -110,18 +111,17 @@ public class WalletServiceImpl implements WalletService{
         return index;
     }
 
-    public Double getInitialBalanceById(int id){
+    public Double getInitialBalanceById(int id) {
         int indexOf = findIndexById(id);
 
-        if(indexOf!=-1){
+        if (indexOf != -1) {
             return walletList.get(indexOf).getInitialBalance();
-        }
-        else {
+        } else {
             return null;
         }
     }
 
-    public Double getTotalIncomeById(int id){
+    public Double getTotalIncomeById(int id) {
         Double totalIncome = null;
         try (Connection connection = CreateConnector.getConnection();
 
@@ -138,19 +138,19 @@ public class WalletServiceImpl implements WalletService{
         } catch (SQLException e) {
             System.out.println(e);
         }
-       return totalIncome;
+        return totalIncome;
     }
 
-    public Double getTotalExpenseById(int id){
+    public Double getTotalExpenseById(int id) {
         Double totalExpense = null;
         try (Connection connection = CreateConnector.getConnection();
 
              PreparedStatement preparedStatement = connection.prepareStatement("select sum(amount) as `totalExpense` from wallet " +
-                                                                                    " join transaction on idWallet = wallet.id " +
-                                                                                    " join user on idUser = user.id" +
-                                                                                    " where user.id = ? and type like `%chi%` " +
-                                                                                    " group by idWallet " +
-                                                                                    " order by totalExpense")) {
+                     " join transaction on idWallet = wallet.id " +
+                     " join user on idUser = user.id" +
+                     " where user.id = ? and type like `%chi%` " +
+                     " group by idWallet " +
+                     " order by totalExpense")) {
             preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
@@ -163,7 +163,10 @@ public class WalletServiceImpl implements WalletService{
         return totalExpense;
     }
 
-    public Double getCurrentBalanceById(int id){
+    public Double getCurrentBalanceById(int id) {
         return getInitialBalanceById(id) + getTotalIncomeById(id) - getTotalExpenseById(id);
     }
+
+
+
 }

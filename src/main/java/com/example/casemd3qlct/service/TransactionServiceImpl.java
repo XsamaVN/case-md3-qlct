@@ -67,8 +67,6 @@ public class TransactionServiceImpl implements TransactionService{
 
     @Override
     public void delete(int id) {
-        int indexOf = findIndexById(id);
-        transactionList.remove(indexOf);
         try (Connection connection = CreateConnector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM transaction WHERE id = ?")) {
             preparedStatement.setInt(1, id);
@@ -113,4 +111,5 @@ public class TransactionServiceImpl implements TransactionService{
         }
         return index;
     }
+
 }
