@@ -178,6 +178,7 @@ public class HomeServlet extends HttpServlet {
             System.out.println(username);
             request.setAttribute("username1", username);
             request.setAttribute("idWalletShow", idWallet);
+            request.setAttribute("categoryList",categoryService.getCategoryList());
         }
         requestDispatcher.forward(request, response);
     }
@@ -193,6 +194,7 @@ public class HomeServlet extends HttpServlet {
             int idEdit = Integer.parseInt(request.getParameter("idTran"));
             Transaction transaction = transactionService.findByid(idEdit);
             request.setAttribute("tranEdit", transaction);
+            request.setAttribute("categoryList",categoryService.getCategoryList());
         }
         requestDispatcher.forward(request, response);
     }

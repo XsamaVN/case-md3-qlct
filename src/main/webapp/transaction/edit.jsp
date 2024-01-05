@@ -213,7 +213,12 @@
                                     <p>id </p> <input disabled type="text" name="id" value="${tranEdit.id}" class="form-control form-control-user" placeholder="id">
                                 </div>
                                 <div class="form-group">
-                                    <p>id Category </p>  <input type="text" name="idCategory" value="${tranEdit.category.id}" class="form-control form-control-user" placeholder="id Category">
+                                    <p>Category</p>
+                                    <select name="idCategory" class="custom-select" required>
+                                        <c:forEach items='${categoryList}' var="category">
+                                            <option  value="${category.id}">${category.name}</option>
+                                        </c:forEach>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <p>id Wallet </p> <input disabled type="text" name="idWalletTran" value="${tranEdit.wallet.id}" class="form-control form-control-user" placeholder="id Wallet">

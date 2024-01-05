@@ -50,8 +50,8 @@
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
-                                                <div class="sidebar-brand-text mx-3" style="font-family:Lobster !important; font-size: 40px !important;">Lê Phi Đức</div>
-                                                <div class="sidebar-brand-text mx-3" style="font-family:Lobster !important; font-size: 30px !important;">Finance manager</div>
+                                                <div class="sidebar-brand-text mx-3" style="font-size: 40px !important;">Lê Phi Đức</div>
+                                                <div class="sidebar-brand-text mx-3" style="font-size: 30px !important;">Finance manager</div>
                                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                 </div>
                                 <form class="user" method="post">

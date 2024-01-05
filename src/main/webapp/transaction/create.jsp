@@ -210,7 +210,12 @@
               <h3 class="h3 mb-2 text-gray-800">Add new transaction</h3>
               <form method="post">
                 <div class="form-group">
-                  <p>id Category </p>  <input max="5" min="1" type="number" name="idCategory"  class="form-control form-control-user" placeholder="id Category">
+                  <p>Category</p>
+                  <select name="idCategory" class="custom-select" required>
+                    <c:forEach items='${categoryList}' var="category">
+                    <option  value="${category.id}">${category.name}</option>
+                    </c:forEach>
+                  </select>
                 </div>
                 <div class="form-group">
                   <p>Amount </p><input type="number" name="amount"  class="form-control form-control-user" placeholder="Amount">
