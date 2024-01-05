@@ -204,7 +204,7 @@
                             <h3 class="h3 mb-2 text-gray-800">Edit transaction</h3>
                             <form method="post">
                                 <div class="form-group">
-                                    <p>id </p> <input type="text" name="id" value="${tranEdit.id}" class="form-control form-control-user" placeholder="id">
+                                    <p>id </p> <input disabled type="text" name="id" value="${tranEdit.id}" class="form-control form-control-user" placeholder="id">
                                 </div>
                                 <div class="form-group">
                                     <p>id Category </p>  <input type="text" name="idCategory" value="${tranEdit.category.id}" class="form-control form-control-user" placeholder="id Category">

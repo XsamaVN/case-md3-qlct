@@ -71,17 +71,34 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-               aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+               aria-expanded="true" aria-controls="collapseOne">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-stack" viewBox="0 0 16 16">
+                    <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
+                    <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2z"/>
+                </svg>
                 <span>Wallet</span>
             </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Your wallet:</h6>
 
-                    <a class="collapse-item" href="/wallet?action=create">add new wallet</a>
-                    <a class="collapse-item" href="/wallet">All wallet</a>
+                    <a class="collapse-item" href="/home?action=createWallet">ADD NEW WALLET</a>
+                    <a class="collapse-item" href="/home">ALL WALLET</a>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Category</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">CATEGORY MANAGER</h6>
+                    <a class="collapse-item" href="/home?action=showCategoryList">Category list</a>
+                    <a class="collapse-item" href="/home?action=createCategory">Add new category</a>
                 </div>
             </div>
         </li>
@@ -223,25 +240,6 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
-                        <div class="col-md-4">
-
-                            <form method="post">
-                                <div class="p-3 py-5">
-                                    <div class="d-flex justify-content-between align-items-center experience">
-                                        <span></span><span class="border px-3 p-1 add-experience"><i
-                                            class="fa fa-plus"></i>&nbsp;<a data-toggle="modal" data-target="#delete">Delete</a></span>
-                                    </div>
-                                    <br>
-                                    <div class="col-md-12"><label class="labels">Name</label><input type="text"
-                                                                                                    class="form-control">
-                                    </div>
-                                    <br>
-                                    <div class="col-md-12"><label class="labels">Password</label><input type="password"
-                                                                                                        class="form-control"
-                                                                                                        value=""></div>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>
