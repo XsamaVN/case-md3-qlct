@@ -320,9 +320,8 @@ public class HomeServlet extends HttpServlet {
     }
 
     private void editTranPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int idTran = Integer.parseInt(request.getParameter("id"));
+        int idTran = Integer.parseInt(request.getParameter("idEdit"));
         int idCategory = Integer.parseInt(request.getParameter("idCategory"));
-
         double amount = Double.parseDouble(request.getParameter("amount"));
         String time = request.getParameter("time");
         String type = request.getParameter("type");

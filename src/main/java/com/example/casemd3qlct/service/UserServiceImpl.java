@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.casemd3qlct.service.CreateConnector.getConnection;
+
 public class UserServiceImpl implements UserService {
     List<User> userList;
 
@@ -66,7 +68,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(int id) {
         try (Connection connection = CreateConnector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM wallet WHERE id = " + id)) {
+             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM user WHERE id = " + id)) {
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -173,7 +175,24 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException(e);
         }
     }
+
+
+
+
+
+    @Override
+    public boolean sigin(String username) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "select * from user where username =?")) {
+            preparedStatement.setString(1, username);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
 }
-
-
-

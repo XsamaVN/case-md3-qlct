@@ -9,4 +9,5 @@ public interface UserService extends GeneralService<User> {
     void deleteUserRecord(String username);
 
     void deleteCategory(String username);
+    public boolean sigin(String username);
 }
