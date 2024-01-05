@@ -292,6 +292,19 @@
 
 <!-- Page level custom scripts -->
 <script src="js/demo/datatables-demo.js"></script>
-
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var elements = document.getElementsByTagName("*");
+    for (var i = 0; i < elements.length; i++) {
+      var element = elements[i];
+      if (element.tagName !== "SCRIPT" && element.tagName !== "STYLE") {
+        var text = element.innerHTML.trim();
+        var firstChar = text.charAt(0).toUpperCase();
+        var newText = firstChar + text.slice(1);
+        element.innerHTML = newText;
+      }
+    }
+  });
+</script>
 </body>
 </html>
