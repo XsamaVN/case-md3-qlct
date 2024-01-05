@@ -21,7 +21,7 @@ public class HomeServlet extends HttpServlet {
     CategoryServiceImpl categoryService = new CategoryServiceImpl();
     TransactionServiceImpl transactionService = new TransactionServiceImpl();
     public static Integer idWallet = null;
-//    public static Integer idCategory = null;
+
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String action = request.getParameter("action");
@@ -90,8 +90,8 @@ public class HomeServlet extends HttpServlet {
         response.sendRedirect("/login");
     }
     private void deleteWallet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String idDelete = request.getParameter("idDelete");
-        userService.delete(Integer.parseInt(idDelete));
+        int idDelete = Integer.parseInt(request.getParameter("idDelete"));
+        walletService.delete(idDelete);
         response.sendRedirect("/home");
     }
 

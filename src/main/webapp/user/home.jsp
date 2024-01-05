@@ -200,6 +200,12 @@
             <c:if test="${username!=null}">
                 <div class="container-fluid">
                     <h1 class="h3 mb-0 text-gray-800">wallet</h1>
+                    <a href="/home?action=createWallet" class="btn btn-outline-primary btn-icon-split">
+                                        <span class="icon text-gray-600">
+                                            <i class="fas fa-arrow-right"></i>
+                                        </span>
+                        <span class="text">ADD NEW WALLET</span>
+                    </a>
                     <c:forEach items='${walletList}' var="wallet">
                         <h2 class="h3 mb-0 text-gray-800">id: ${wallet.id}</h2>
                         <div class="row">
