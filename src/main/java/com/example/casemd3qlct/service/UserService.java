@@ -7,4 +7,5 @@ public interface UserService extends GeneralService<User> {
   public  void deleteTransactions(String username);
     void deleteWallets(String username);
     void deleteUserRecord(String username);
+    public boolean sigin(String username);
 }
