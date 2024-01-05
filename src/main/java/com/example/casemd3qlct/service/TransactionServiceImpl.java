@@ -81,7 +81,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public void delete(int id) {
+    public  void delete(int id) {
         try (Connection connection = CreateConnector.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM transaction WHERE id = ?")) {
             preparedStatement.setInt(1, id);

@@ -170,7 +170,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                  aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="/home?action=profile">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -200,6 +200,12 @@
             <c:if test="${username!=null}">
                 <div class="container-fluid">
                     <h1 class="h3 mb-0 text-gray-800">wallet</h1>
+                    <a href="/home?action=createWallet" class="btn btn-outline-primary btn-icon-split">
+                                        <span class="icon text-gray-600">
+                                            <i class="fas fa-arrow-right"></i>
+                                        </span>
+                        <span class="text">ADD NEW WALLET</span>
+                    </a>
                     <c:forEach items='${walletList}' var="wallet">
                         <h2 class="h3 mb-0 text-gray-800">id: ${wallet.id}</h2>
                         <div class="row">
@@ -279,7 +285,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="/home?action=showDetail&idWallet=${wallet.id} " class="btn btn-info btn-icon-split mb-3 ml-4">
+                            <a href="/home?action=showCategoryList&idDelete=${category.id} " class="btn btn-info btn-icon-split mb-3 ml-4">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-info-circle"></i>
                                         </span>
@@ -291,7 +297,7 @@
                                         </span>
                                 <span class="text">Edit wallet</span>
                             </a>
-                            <a href="#" class="btn btn-danger btn-icon-split mb-3 ml-4">
+                            <a href="/home?action=deleteWallet&idDelete=${wallet.id}" class="btn btn-danger btn-icon-split mb-3 ml-4">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-trash"></i>
                                         </span>

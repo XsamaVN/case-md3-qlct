@@ -1,26 +1,37 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: chiuchiuleuleu
-  Date: 02/01/2024
-  Time: 15:48
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Lê Phi Đức - Finance manager</title>
+
+    <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/profile.css" rel="stylesheet">
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            rel="stylesheet">
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            rel="stylesheet">
 
-    <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
+
 <body id="page-top">
 
 <!-- Page Wrapper -->
@@ -157,19 +168,19 @@
 
                     <!-- Nav Item - User Information -->
 
-                    <c:if test="${username1!=null}">
+                    <c:if test="${username!=null}">
                         <li class="nav-item dropdown no-arrow">
 
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${username1}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${username}</span>
                                 <img class="img-profile rounded-circle"
                                      src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                  aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="/home?action=profile">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -183,7 +194,7 @@
 
                         </li>
                     </c:if>
-                    <c:if test="${null==username1}">
+                    <c:if test="${null==username}">
                         <li class="nav-item">
                             <a class="nav-link" href="/login">
                                 <span>Login</span></a>
@@ -196,148 +207,91 @@
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
-            <c:if test="${username1!=null}">
+            <c:if test="${username!=null}">
             <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Wallet: ${idWalletShow}</h1>
-                <a class="btn btn-primary mb-4" href="/home?action=createTran">ADD NEW TRANSACTION</a>
-                <!-- DataTales Example -->
-                    <%--                    bang thu--%>
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Income</h6>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                    <tr>
-                                        <th>Category</th>
-                                        <th>Amount</th>
-                                        <th>Time</th>
-                                        <th>Transaction Type</th>
-                                        <th>description</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th>Category</th>
-                                        <th>Amount</th>
-                                        <th>Time</th>
-                                        <th>Transaction Type</th>
-                                        <th>description</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    <c:forEach items='${bangThu}' var="transactionThu">
-                                        <tr>
-                                            <td>${transactionThu.category.name}</td>
-                                            <td>${transactionThu.amount}</td>
-                                            <td>${transactionThu.time}</td>
-                                            <td>${transactionThu.type}</td>
-                                            <td>${transactionThu.description}</td>
-                                            <td><a class="btn btn-primary"
-                                                   href="/home?action=deleteTranThu&idTran=${category.id}">delete</a>
-                                            </td>
-                                            <td><a class="btn btn-primary"
-                                                   href="/home?action=editCategory&idTran=${category.id}">edit</a>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
+                <div class="container rounded bg-white mt-5 mb-5">
+                    <div class="row">
+                        <div class="col-md-3 border-right">
+                            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img
+                                    class="rounded-circle mt-5" width="150px"
+                                    src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
+                                    class="font-weight-bold">${username}</span><span
+                                    class="text-black-50"></span><span> </span></div>
+                        </div>
+                        <div class="col-md-5 border-right">
+                            <div class="p-3 py-5">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h4 class="text-right">Profile Settings</h4>
+                                </div>
+                                <form method="post">
+                                    <div class="row mt-2">
+                                        <div class="col-md-6"><label class="labels">Name</label><input type="text"
+                                                                                                       class="form-control"
+                                                                                                       placeholder="username"
+                                                                                                       name="username"
+                                                                                                       value="${username}">
+                                        </div>
+                                        <div class="col-md-6"><label class="labels">New Password</label><input
+                                                type="password" class="form-control" name="password" value=""></div>
+                                    </div>
+                                    <div class="mt-5 text-center">
+                                        <button class="btn btn-primary profile-button">Save Profile</button>
+                                        <a class="btn btn-primary" href="/home?action=delete&username=${username}">Delete</a>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </div>
-                </div>
-                    <%--                            Bangchi--%>
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Expense</h6>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTableOne" width="100%" cellspacing="0">
-                                    <thead>
-                                    <tr>
-                                        <th>Category</th>
-                                        <th>Amount</th>
-                                        <th>Time</th>
-                                        <th>Transaction Type</th>
-                                        <th>description</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th>Category</th>
-                                        <th>Amount</th>
-                                        <th>Time</th>
-                                        <th>Transaction Type</th>
-                                        <th>description</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    <c:forEach items='${bangChi}' var="transactionChi">
-                                        <tr>
-                                            <td>${transactionChi.category.name}</td>
-                                            <td>${transactionChi.amount}</td>
-                                            <td>${transactionChi.time}</td>
-                                            <td>${transactionChi.type}</td>
-                                            <td>${transactionChi.description}</td>
-                                            <td><a class="btn btn-primary"
-                                                   href="/home?action=deleteTranThu&idTran=${transactionChi.id}">delete</a>
-                                            </td>
-                                            <td><a class="btn btn-primary"
-                                                   href="/home?action=editCategory&idEdit=${transactionChi.id}">edit</a>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </c:if>
-
-            <!-- End of Content Wrapper -->
-
-        </div>
-        <!-- End of Page Wrapper -->
-
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="/home?action=logout">Logout</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </c:if>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="/home?action=logout">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Are you want to delete account ?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <a class="btn btn-primary" href="/home?action=delete">Delete</a>
+
+        </div>
+    </div>
+</div>
+</div>
 </div>
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
@@ -350,18 +304,12 @@
 <script src="js/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
-<script src="vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="vendor/chart.js/Chart.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="js/demo/datatables-demo.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#dataTable').DataTable();
-    });
-    $(document).ready(function() {
-        $('#dataTableOne').DataTable();
-    });
-</script>
+<script src="js/demo/chart-area-demo.js"></script>
+<script src="js/demo/chart-pie-demo.js"></script>
+
 </body>
+
 </html>
