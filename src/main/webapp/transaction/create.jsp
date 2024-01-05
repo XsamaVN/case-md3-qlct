@@ -210,10 +210,10 @@
               <h3 class="h3 mb-2 text-gray-800">Add new transaction</h3>
               <form method="post">
                 <div class="form-group">
-                  <p>id Category </p>  <input type="text" name="idCategory"  class="form-control form-control-user" placeholder="id Category">
+                  <p>id Category </p>  <input max="5" min="1" type="number" name="idCategory"  class="form-control form-control-user" placeholder="id Category">
                 </div>
                 <div class="form-group">
-                  <p>Amount </p><input type="text" name="amount"  class="form-control form-control-user" placeholder="Amount">
+                  <p>Amount </p><input type="number" name="amount"  class="form-control form-control-user" placeholder="Amount">
                 </div>
                 <div class="form-group">
                   <p>Time </p> <input type="datetime-local" name="time"  class="form-control form-control-user" placeholder="Time">
@@ -221,8 +221,8 @@
                 <div class="form-group">
                   <p>Type </p>
                   <select name="type" class="custom-select" required>
-                    <option  value="thu">thu</option>
-                    <option  value="chi">chi</option>
+                    <option  value="Thu">Thu</option>
+                    <option  value="Chi">Chi</option>
                   </select>
                 </div>
 

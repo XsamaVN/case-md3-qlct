@@ -65,7 +65,7 @@ public class HomeServlet extends HttpServlet {
             case "createTran":
                 showFormCreateTran(request, response);
                 break;
-            case "deleteTranThu":
+            case "deleteTran":
                 deleteTranThu(request, response);
                 break;
             case "editTran":
@@ -190,7 +190,7 @@ public class HomeServlet extends HttpServlet {
             System.out.println(username);
             request.setAttribute("username1", username);
             request.setAttribute("idWalletShow", idWallet);
-            int idEdit = Integer.parseInt(request.getParameter("idEdit"));
+            int idEdit = Integer.parseInt(request.getParameter("idTran"));
             Transaction transaction = transactionService.findByid(idEdit);
             request.setAttribute("tranEdit", transaction);
         }
@@ -320,7 +320,7 @@ public class HomeServlet extends HttpServlet {
     }
 
     private void editTranPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int idTran = Integer.parseInt(request.getParameter("idEdit"));
+        int idTran = Integer.parseInt(request.getParameter("idTran"));
         int idCategory = Integer.parseInt(request.getParameter("idCategory"));
         double amount = Double.parseDouble(request.getParameter("amount"));
         String time = request.getParameter("time");

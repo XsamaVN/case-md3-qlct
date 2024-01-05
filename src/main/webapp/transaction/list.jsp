@@ -62,7 +62,8 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
                aria-expanded="true" aria-controls="collapseOne">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-stack" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-cash-stack" viewBox="0 0 16 16">
                     <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
                     <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2z"/>
                 </svg>
@@ -80,7 +81,8 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                aria-expanded="true" aria-controls="collapseTwo">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags"
+                     viewBox="0 0 16 16">
                     <path d="M3 2v4.586l7 7L14.586 9l-7-7zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586z"/>
                     <path d="M5.5 5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1m0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1z"/>
                 </svg>
@@ -200,115 +202,115 @@
 
             <!-- Begin Page Content -->
             <c:if test="${username1!=null}">
-            <div class="container-fluid">
+                <div class="container-fluid">
 
-                <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Wallet: ${idWalletShow}</h1>
-                <a class="btn btn-primary mb-4" href="/home?action=createTran">ADD NEW TRANSACTION</a>
-                <!-- DataTales Example -->
-                    <%--                    bang thu--%>
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Income</h6>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                    <tr>
-                                        <th>Category</th>
-                                        <th>Amount</th>
-                                        <th>Time</th>
-                                        <th>Transaction Type</th>
-                                        <th>description</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th>Category</th>
-                                        <th>Amount</th>
-                                        <th>Time</th>
-                                        <th>Transaction Type</th>
-                                        <th>description</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    <c:forEach items='${bangThu}' var="transactionThu">
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Wallet: ${idWalletShow}</h1>
+                    <a class="btn btn-primary mb-4" href="/home?action=createTran">ADD NEW TRANSACTION</a>
+                    <!-- DataTales Example -->
+                        <%--                    bang thu--%>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Income</h6>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
                                         <tr>
-                                            <td>${transactionThu.category.name}</td>
-                                            <td>${transactionThu.amount}</td>
-                                            <td>${transactionThu.time}</td>
-                                            <td>${transactionThu.type}</td>
-                                            <td>${transactionThu.description}</td>
-                                            <td><a class="btn btn-primary"
-                                                   href="/home?action=deleteTranThu&idTran=${category.id}">delete</a>
-                                            </td>
-                                            <td><a class="btn btn-primary"
-                                                   href="/home?action=editCategory&idTran=${category.id}">edit</a>
-                                            </td>
+                                            <th>Category</th>
+                                            <th>Amount</th>
+                                            <th>Time</th>
+                                            <th>Transaction Type</th>
+                                            <th>description</th>
+                                            <th></th>
+                                            <th></th>
                                         </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tfoot>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Amount</th>
+                                            <th>Time</th>
+                                            <th>Transaction Type</th>
+                                            <th>description</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        </tfoot>
+                                        <tbody>
+                                        <c:forEach items='${bangThu}' var="transactionThu">
+                                            <tr>
+                                                <td>${transactionThu.category.name}</td>
+                                                <td name="moneyFormat">${transactionThu.amount}</td>
+                                                <td name="timeFormat">${transactionThu.time}</td>
+                                                <td>${transactionThu.type}</td>
+                                                <td>${transactionThu.description}</td>
+                                                <td><a class="btn btn-primary"
+                                                       href="/home?action=deleteTran&idTran=${transactionThu.id}">delete</a>
+                                                </td>
+                                                <td><a class="btn btn-primary"
+                                                       href="/home?action=editTran&idTran=${transactionThu.id}">edit</a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <%--                            Bangchi--%>
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Expense</h6>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTableOne" width="100%" cellspacing="0">
+                                        <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Amount</th>
+                                            <th>Time</th>
+                                            <th>Transaction Type</th>
+                                            <th>description</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tfoot>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th>Amount</th>
+                                            <th>Time</th>
+                                            <th>Transaction Type</th>
+                                            <th>description</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        </tfoot>
+                                        <tbody>
+                                        <c:forEach items='${bangChi}' var="transactionChi">
+                                            <tr>
+                                                <td>${transactionChi.category.name}</td>
+                                                <td name="moneyFormat">${transactionChi.amount}</td>
+                                                <td name="timeFormat">${transactionChi.time}</td>
+                                                <td>${transactionChi.type}</td>
+                                                <td>${transactionChi.description}</td>
+                                                <td><a class="btn btn-primary"
+                                                       href="/home?action=deleteTran&idTran=${transactionChi.id}">delete</a>
+                                                </td>
+                                                <td><a class="btn btn-primary"
+                                                       href="/home?action=editTran&idTran=${transactionChi.id}">edit</a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                    <%--                            Bangchi--%>
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Expense</h6>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTableOne" width="100%" cellspacing="0">
-                                    <thead>
-                                    <tr>
-                                        <th>Category</th>
-                                        <th>Amount</th>
-                                        <th>Time</th>
-                                        <th>Transaction Type</th>
-                                        <th>description</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th>Category</th>
-                                        <th>Amount</th>
-                                        <th>Time</th>
-                                        <th>Transaction Type</th>
-                                        <th>description</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    <c:forEach items='${bangChi}' var="transactionChi">
-                                        <tr>
-                                            <td>${transactionChi.category.name}</td>
-                                            <td>${transactionChi.amount}</td>
-                                            <td>${transactionChi.time}</td>
-                                            <td>${transactionChi.type}</td>
-                                            <td>${transactionChi.description}</td>
-                                            <td><a class="btn btn-primary"
-                                                   href="/home?action=deleteTranThu&idTran=${transactionChi.id}">delete</a>
-                                            </td>
-                                            <td><a class="btn btn-primary"
-                                                   href="/home?action=editCategory&idTran=${transactionChi.id}">edit</a>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             </c:if>
 
             <!-- End of Content Wrapper -->
@@ -359,12 +361,46 @@
 <!-- Page level custom scripts -->
 <script src="js/demo/datatables-demo.js"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#dataTable').DataTable();
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#dataTableOne').DataTable();
     });
+    // Lấy phần tử chứa số tiền cần định dạng
+    let elements = document.getElementsByName("moneyFormat");
+
+    // Định dạng số tiền
+    for (let i = 0; i < elements.length; i++) {
+        let moneyValue = parseFloat(elements[i].innerHTML).toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'USD' // Đổi 'USD' thành mã tiền tệ mong muốn (ví dụ: 'EUR' cho Euro)
+        });
+
+        elements[i].innerHTML = moneyValue;
+    }
+    //dinh dang thơi gian
+    function convertDateTimeFormat(dateTime) {
+        var dateObj = new Date(dateTime);
+        var hours = dateObj.getHours();
+        var minutes = dateObj.getMinutes();
+        var day = dateObj.getDate();
+        var month = dateObj.getMonth() + 1; // Lưu ý: Tháng bắt đầu từ 0, nên cần cộng thêm 1
+        var year = dateObj.getFullYear();
+
+        // Format hh:mm dd/mm/yyyy
+        var formattedDateTime = hours.toString().padStart(2, '0') + ":" + minutes.toString().padStart(2, '0') + " " + day.toString().padStart(2, '0') + "/" + month.toString().padStart(2, '0') + "/" + year;
+
+        return formattedDateTime;
+    }
+
+    var elementss = document.getElementsByName("timeFormat");
+
+    // Chuyển đổi định dạng và gán giá trị vào từng phần tử
+    for (var i = 0; i < elementss.length; i++) {
+        var formattedDateTime = convertDateTimeFormat(elementss[i].innerHTML);
+        elementss[i].innerHTML = formattedDateTime;
+    }
 </script>
 </body>
 </html>

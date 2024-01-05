@@ -227,8 +227,8 @@
                                 <div class="form-group">
                                     <p>Type </p>
                                 <select name="type" class="custom-select" required>
-                                    <option  value="thu">thu</option>
-                                    <option  value="chi">chi</option>
+                                    <option  value="Thu">Thu</option>
+                                    <option  value="Chi">Chi</option>
                                 </select>
                                 </div>
 
