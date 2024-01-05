@@ -60,8 +60,13 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         String usernameError = null;
         String passwordError = null;
-
-        if (username == null || username.trim().isEmpty()) {
+        if ((username == null || username.trim().isEmpty()) && (password == null || password.trim().isEmpty())) {
+            usernameError = "Please do not leave username blank!";
+            request.setAttribute("usernameError", usernameError);
+            passwordError = "Please do not leave password blank!";
+            request.setAttribute("passwordError", passwordError);
+            request.getRequestDispatcher("user/register.jsp").forward(request, response);
+        } else if (username == null || username.trim().isEmpty()) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/register.jsp");
             usernameError = "Please do not leave username blank!";
             request.setAttribute("usernameError", usernameError);
@@ -110,8 +115,7 @@ public class LoginServlet extends HttpServlet {
             } else {
                 response.sendRedirect("/login");
             }
-        }
-        else {
+        } else {
             response.sendRedirect("/login");
         }
     }
