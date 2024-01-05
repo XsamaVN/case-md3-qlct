@@ -1,7 +1,6 @@
 package com.example.casemd3qlct.service;
 
 import com.example.casemd3qlct.model.Category;
-import com.example.casemd3qlct.model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -64,10 +63,8 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public void delete(int id) {
         try (Connection connection = CreateConnector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM transaction where idCategory = ? and idWalet = ?; DELETE FROM category WHERE id = ?")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM category where id = ? ")) {
             preparedStatement.setInt(1, id);
-            preparedStatement.setInt(2, id);
-            preparedStatement.setInt(3, id);
             System.out.println(preparedStatement);
 
             preparedStatement.executeUpdate();

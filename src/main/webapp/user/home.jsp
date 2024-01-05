@@ -279,7 +279,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="/home?action=showDetail&idWallet=${wallet.id} " class="btn btn-info btn-icon-split mb-3 ml-4">
+                            <a href="/home?action=showCategoryList&idDelete=${category.id} " class="btn btn-info btn-icon-split mb-3 ml-4">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-info-circle"></i>
                                         </span>
@@ -291,7 +291,7 @@
                                         </span>
                                 <span class="text">Edit wallet</span>
                             </a>
-                            <a href="#" class="btn btn-danger btn-icon-split mb-3 ml-4">
+                            <a href="/home?action=deleteWallet&idDelete=${wallet.id}" class="btn btn-danger btn-icon-split mb-3 ml-4">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-trash"></i>
                                         </span>

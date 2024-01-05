@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(int id) {
         try (Connection connection = CreateConnector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM user WHERE id = " + id)) {
+             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM wallet WHERE id = " + id)) {
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -155,6 +155,18 @@ public class UserServiceImpl implements UserService {
         try (Connection connection = CreateConnector.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(
                 "DELETE FROM user WHERE username = ?")) {
+            preparedStatement.setString(1, username);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void deleteCategory(String username) {
+        try (Connection connection = CreateConnector.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "DELETE FROM category WHERE id = ?")) {
             preparedStatement.setString(1, username);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

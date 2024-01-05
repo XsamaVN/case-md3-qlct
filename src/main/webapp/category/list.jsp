@@ -231,7 +231,7 @@
                                             <td>${category.id}</td>
                                             <td>${category.name}</td>
                                             <td><a class="btn btn-primary"
-                                                   href="/home?action=deleteTranThu&idTran=${category.id}">delete</a>
+                                                   href="/home?action=deleteCategory&idDelete1=${category.id}">delete</a>
                                             </td>
                                             <td><a class="btn btn-primary"
                                                    href="/home?action=editTran&idEdit=${category.id}">edit</a>

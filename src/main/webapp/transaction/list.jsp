@@ -236,15 +236,15 @@
                                     <c:forEach items='${bangThu}' var="transactionThu">
                                         <tr>
                                             <td>${transactionThu.category.name}</td>
-                                            <td>$ ${transactionThu.amount}</td>
+                                            <td>${transactionThu.amount}</td>
                                             <td>${transactionThu.time}</td>
                                             <td>${transactionThu.type}</td>
                                             <td>${transactionThu.description}</td>
                                             <td><a class="btn btn-primary"
-                                                   href="/home?action=deleteTranThu&idTran=${transactionThu.id}">delete</a>
+                                                   href="/home?action=deleteTranThu&idTran=${category.id}">delete</a>
                                             </td>
                                             <td><a class="btn btn-primary"
-                                                   href="/home?action=editTran&idEdit=${transactionThu.id}">edit</a>
+                                                   href="/home?action=editCategory&idTran=${category.id}">edit</a>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -287,7 +287,7 @@
                                     <c:forEach items='${bangChi}' var="transactionChi">
                                         <tr>
                                             <td>${transactionChi.category.name}</td>
-                                            <td>$ ${transactionChi.amount}</td>
+                                            <td>${transactionChi.amount}</td>
                                             <td>${transactionChi.time}</td>
                                             <td>${transactionChi.type}</td>
                                             <td>${transactionChi.description}</td>
@@ -295,7 +295,7 @@
                                                    href="/home?action=deleteTranThu&idTran=${transactionChi.id}">delete</a>
                                             </td>
                                             <td><a class="btn btn-primary"
-                                                   href="/home?action=editTran&idEdit=${transactionChi.id}">edit</a>
+                                                   href="/home?action=editCategory&idEdit=${transactionChi.id}">edit</a>
                                             </td>
                                         </tr>
                                     </c:forEach>
