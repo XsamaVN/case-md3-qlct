@@ -7,35 +7,40 @@ public class Wallet {
     private double totalIncome;
     private double totalExpense;
     private double initialBalance;
+    private String name;
 
     public Wallet() {
     }
 
-    public Wallet(int id, User user, double currentBalance, double totalIncome, double totalExpense, double initialBalance) {
+    public Wallet(int id, User user, double currentBalance, double totalIncome, double totalExpense, double initialBalance, String name) {
         this.id = id;
         this.user = user;
         this.currentBalance = currentBalance;
         this.totalIncome = totalIncome;
         this.totalExpense = totalExpense;
         this.initialBalance = initialBalance;
+        this.name = name;
     }
 
-    public Wallet(User user, double currentBalance, double totalIncome, double totalExpense, double initialBalance) {
+    public Wallet(User user, double currentBalance, double totalIncome, double totalExpense, double initialBalance, String name) {
         this.user = user;
         this.currentBalance = currentBalance;
         this.totalIncome = totalIncome;
         this.totalExpense = totalExpense;
         this.initialBalance = initialBalance;
+        this.name = name;
     }
 
-    public Wallet(User user, double initialBalance) {
+    public Wallet(User user, double initialBalance, String name) {
         this.user = user;
         this.initialBalance = initialBalance;
+        this.name = name;
     }
 
-    public Wallet(int id, double initialBalance) {
+    public Wallet(int id, double initialBalance, String name) {
         this.id = id;
         this.initialBalance = initialBalance;
+        this.name = name;
     }
 
     public int getId() {
@@ -52,6 +57,14 @@ public class Wallet {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public double getCurrentBalance() {

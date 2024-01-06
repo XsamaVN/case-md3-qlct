@@ -274,8 +274,9 @@ public class HomeServlet extends HttpServlet {
     }
     private void EditWallet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int idEdit = Integer.parseInt(request.getParameter("idEdit"));
+        String name = request.getParameter("name");
         double initialBalance = Double.parseDouble(request.getParameter("initial"));
-        Wallet wallet = new Wallet(idEdit, initialBalance);
+        Wallet wallet = new Wallet(idEdit, initialBalance,name);
         walletService.edit(idEdit, wallet);
         response.sendRedirect("/home");
     }
@@ -288,7 +289,8 @@ public class HomeServlet extends HttpServlet {
 
     private void createWallet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         double initialBalance = Double.parseDouble(request.getParameter("initial"));
-        Wallet wallet = new Wallet(userService.findByid(LoginServlet.idUserLogin), initialBalance);
+        String name = request.getParameter("name");
+        Wallet wallet = new Wallet(userService.findByid(LoginServlet.idUserLogin).getId(), initialBalance,name);
         walletService.create(wallet);
         response.sendRedirect("/home");
     }

@@ -210,7 +210,7 @@
                         <span class="text">ADD NEW WALLET</span>
                     </a>
                     <c:forEach items='${walletList}' var="wallet">
-                        <h2 class="h3 mb-0 text-gray-800">id: ${wallet.id}</h2>
+                        <h2 class="h3 mb-0 text-gray-800">Name: ${wallet.name}</h2>
                         <div class="row">
                             <!-- Earnings (Monthly) Card Example -->
                             <div class="col-xl-3 col-md-6 mb-4">

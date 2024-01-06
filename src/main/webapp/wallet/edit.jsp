@@ -209,7 +209,7 @@
                             <h3 class="h3 mb-2 text-gray-800">Add new wallet</h3>
                             <form method="post">
                                 <div class="form-group">
-                                    <p>Initial Balance </p> <input disabled type="number" name="id" value="${editWallet.id}" class="form-control form-control-user" placeholder="Initial Balance">
+                                    <p>Wallet Name </p> <input type="text" name="name" ${editWallet.name}  class="form-control form-control-user" placeholder="Wallet Name">
                                 </div>
                                 <div class="form-group">
                                     <p>Initial Balance </p> <input type="number" name="initial" value="${editWallet.initialBalance}" class="form-control form-control-user" placeholder="Initial Balance">

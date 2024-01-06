@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class WalletServiceImpl implements WalletService {
@@ -33,8 +32,9 @@ public class WalletServiceImpl implements WalletService {
                 double totalExpense = getTotalExpenseById(idGet);
                 double initialBalance = rs.getDouble("initial_balance");
                 double currentBalance = initialBalance + totalIncome - totalExpense;
+                String name = rs.getString("name");
 
-                walletList.add(new Wallet(idGet, userService.findByid(idUser), currentBalance, totalIncome, totalExpense, initialBalance));
+                walletList.add(new Wallet(idGet, userService.findByid(idUser), currentBalance, totalIncome, totalExpense, initialBalance,name));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -45,10 +45,10 @@ public class WalletServiceImpl implements WalletService {
     @Override
     public void create(Wallet wallet) {
         try (Connection connection = CreateConnector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("insert into wallet(idUser, initial_balance) values (?,?);")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("insert into wallet(idUser, initial_balance, name) values (?,?,?);")) {
             preparedStatement.setDouble(1, wallet.getUser().getId());
             preparedStatement.setDouble(2, wallet.getInitialBalance());
-
+            preparedStatement.setString(3, wallet.getName());
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -59,9 +59,10 @@ public class WalletServiceImpl implements WalletService {
     @Override
     public void edit(int id, Wallet wallet) {
         try (Connection connection = CreateConnector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE wallet SET initial_balance = ? WHERE id = ?")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE wallet SET initial_balance = ?, name = ? WHERE id = ?")) {
             preparedStatement.setDouble(1, wallet.getInitialBalance());
-            preparedStatement.setInt(2, id);
+            preparedStatement.setString(2, wallet.getName());
+            preparedStatement.setInt(3, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -93,8 +94,8 @@ public class WalletServiceImpl implements WalletService {
                 double totalIncome = rs.getDouble("total_income");
                 double totalExpense = rs.getDouble("total_expense");
                 double initialBalance = rs.getDouble("initial_balance");
-
-                wallet = new Wallet(idWallet, userService.findByid(idUser), currentBalance, totalIncome, totalExpense, initialBalance);
+                String name = rs.getString("name");
+                wallet = new Wallet(idWallet, userService.findByid(idUser), currentBalance, totalIncome, totalExpense, initialBalance, name);
             }
         } catch (SQLException e) {
             System.out.println(e);
