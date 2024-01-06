@@ -206,7 +206,7 @@
           <div class="row">
             <div class="offset-2"></div>
             <div class="col-8">
-              <h1 class="h3 mb-2 text-gray-800">Wallet: ${idWalletShow}</h1>
+              <a class="btn btn-outline-primary mb-2" href="/home?action=showDetail&idWallet=${idWallet}">Back</a>
               <h3 class="h3 mb-2 text-gray-800">Add new transaction</h3>
               <form method="post">
                 <div class="form-group">

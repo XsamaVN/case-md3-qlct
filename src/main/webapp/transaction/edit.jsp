@@ -206,12 +206,10 @@
                     <div class="row">
                         <div class="offset-2"></div>
                         <div class="col-8">
-                            <h1 class="h3 mb-2 text-gray-800">Wallet: ${idWalletShow}</h1>
+                            <a class="btn btn-outline-primary mb-2" href="/home?action=showDetail&idWallet=${tranEdit.wallet.id}">Back</a>
+                            <h1 class="h3 mb-2 text-gray-800">Wallet: ${tranEdit.wallet.name}</h1>
                             <h3 class="h3 mb-2 text-gray-800">Edit transaction</h3>
                             <form method="post">
-                                <div class="form-group">
-                                    <p>id </p> <input disabled type="text" name="id" value="${tranEdit.id}" class="form-control form-control-user" placeholder="id">
-                                </div>
                                 <div class="form-group">
                                     <p>Category</p>
                                     <select name="idCategory" class="custom-select" required>
@@ -219,9 +217,6 @@
                                             <option  value="${category.id}">${category.name}</option>
                                         </c:forEach>
                                     </select>
-                                </div>
-                                <div class="form-group">
-                                    <p>id Wallet </p> <input disabled type="text" name="idWalletTran" value="${tranEdit.wallet.id}" class="form-control form-control-user" placeholder="id Wallet">
                                 </div>
                                 <div class="form-group">
                                     <p>Amount </p><input type="text" name="amount" value="${tranEdit.amount}" class="form-control form-control-user" placeholder="Amount">

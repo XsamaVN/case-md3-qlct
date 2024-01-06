@@ -205,7 +205,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Wallet: ${idWalletShow}</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Wallet: ${walletName}</h1>
                     <a class="btn btn-primary mb-4" href="/home?action=createTran">ADD NEW TRANSACTION</a>
                     <!-- DataTales Example -->
                         <%--                    bang thu--%>

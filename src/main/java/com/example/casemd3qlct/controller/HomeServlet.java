@@ -177,7 +177,7 @@ public class HomeServlet extends HttpServlet {
             String username = userService.findByid(LoginServlet.idUserLogin).getUsername();
             System.out.println(username);
             request.setAttribute("username1", username);
-            request.setAttribute("idWalletShow", idWallet);
+            request.setAttribute("idWallet", idWallet);
             request.setAttribute("categoryList",categoryService.getCategoryList());
         }
         requestDispatcher.forward(request, response);
@@ -213,7 +213,7 @@ public class HomeServlet extends HttpServlet {
             System.out.println(username);
             request.setAttribute("username1", username);
             idWallet = Integer.parseInt(request.getParameter("idWallet"));
-            request.setAttribute("idWalletShow", idWallet);
+            request.setAttribute("walletName", walletService.findByid(idWallet).getName());
             request.setAttribute("bangChi", transactionService.findTransactionListByWalletId(idWallet, "chi"));
             request.setAttribute("bangThu", transactionService.findTransactionListByWalletId(idWallet, "thu"));
         }
