@@ -30,10 +30,10 @@ public class HomeServlet extends HttpServlet {
         }
         switch (action) {
             case "profile":
-                profile(request, response);
+                showFormEditProfile(request, response);
                 break;
-            case "delete":
-                delete1(request, response);
+            case "deleteProfile":
+                deleteProfile(request, response);
                 break;
             case "editWallet":
                 showEditWalletForm(request, response);
@@ -51,7 +51,7 @@ public class HomeServlet extends HttpServlet {
                 showCreateCategoryForm(request, response);
                 break;
             case "editCategory":
-                editCategory(request, response);
+                showEditCategoryForm(request, response);
                 break;
             case "deleteCategory":
                 deleteCategory(request,response);
@@ -66,7 +66,7 @@ public class HomeServlet extends HttpServlet {
                 showFormCreateTran(request, response);
                 break;
             case "deleteTran":
-                deleteTranThu(request, response);
+                deleteTran(request, response);
                 break;
             case "editTran":
                 editTran(request, response);
@@ -82,7 +82,7 @@ public class HomeServlet extends HttpServlet {
         response.sendRedirect("/home?action=showCategoryList");
     }
 
-    private void delete1(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void deleteProfile(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = request.getParameter("username");
         userService.deleteTransactions(username);
         userService.deleteWallets(username);
@@ -95,7 +95,7 @@ public class HomeServlet extends HttpServlet {
         response.sendRedirect("/home");
     }
 
-    private void profile(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    private void showFormEditProfile(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("user/profile.jsp");
         if (LoginServlet.idUserLogin != null) {
             String username = userService.findByid(LoginServlet.idUserLogin).getUsername();
@@ -199,10 +199,10 @@ public class HomeServlet extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
-    private void deleteTranThu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void deleteTran(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idDelete = Integer.parseInt(request.getParameter("idTran"));
         transactionService.delete(idDelete);
-        response.sendRedirect("home?action=showCategoryList=" + idWallet);
+        response.sendRedirect("/home?action=showDetail&idWallet=" + idWallet);
     }
 
     private void showDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -268,9 +268,15 @@ public class HomeServlet extends HttpServlet {
                 editCategory(request, response);
                 break;
             case "profile":
-                profile1(request,response);
+                editProfile(request,response);
                 break;
         }
+    }
+    private void editProfile(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        userService.changeprofile(username, password);
+        response.sendRedirect("/home");
     }
     private void EditWallet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int idEdit = Integer.parseInt(request.getParameter("idEdit"));
@@ -280,17 +286,13 @@ public class HomeServlet extends HttpServlet {
         walletService.edit(idEdit, wallet);
         response.sendRedirect("/home");
     }
-    private void profile1(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        userService.changeprofile(username, password);
-        response.sendRedirect("/home");
-    }
+
 
     private void createWallet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         double initialBalance = Double.parseDouble(request.getParameter("initial"));
         String name = request.getParameter("name");
-        Wallet wallet = new Wallet(userService.findByid(LoginServlet.idUserLogin).getId(), initialBalance,name);
+        int idUser = LoginServlet.idUserLogin;
+        Wallet wallet = new Wallet(userService.findByid(idUser), initialBalance,name);
         walletService.create(wallet);
         response.sendRedirect("/home");
     }

@@ -292,7 +292,7 @@
                                         <span class="icon text-white-50">
                                             <i class="fas fa-info-circle"></i>
                                         </span>
-                                <span class="text">Wallet ${wallet.id} Detail</span>
+                                <span class="text">Wallet Detail</span>
                             </a>
                             <a href="/home?action=editWallet&idEdit=${wallet.id}" class="btn btn-primary btn-icon-split mb-3 ml-4">
                                         <span class="icon text-white-50">

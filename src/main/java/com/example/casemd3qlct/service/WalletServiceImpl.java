@@ -45,8 +45,8 @@ public class WalletServiceImpl implements WalletService {
     @Override
     public void create(Wallet wallet) {
         try (Connection connection = CreateConnector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("insert into wallet(idUser, initial_balance, name) values (?,?,?);")) {
-            preparedStatement.setDouble(1, wallet.getUser().getId());
+             PreparedStatement preparedStatement = connection.prepareStatement("insert into wallet(idUser, initial_balance, name) values (?,?,?)")) {
+            preparedStatement.setInt(1, wallet.getUser().getId());
             preparedStatement.setDouble(2, wallet.getInitialBalance());
             preparedStatement.setString(3, wallet.getName());
             System.out.println(preparedStatement);

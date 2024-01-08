@@ -219,7 +219,9 @@
                                     class="rounded-circle mt-5" width="150px"
                                     src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
                                     class="font-weight-bold">${username}</span><span
-                                    class="text-black-50"></span><span> </span></div>
+                                    class="text-black-50"></span><span> </span>
+                                <a class="btn btn-outline-danger mt-3" href="/home?action=deleteProfile&username=${username}">Delete</a></div>
+
                         </div>
                         <div class="col-md-5 border-right">
                             <div class="p-3 py-5">
@@ -237,9 +239,8 @@
                                         <div class="col-md-6"><label class="labels">New Password</label><input
                                                 type="password" class="form-control" name="password" value=""></div>
                                     </div>
-                                    <div class="mt-5 text-center">
+                                         <div class="mt-5 text-center">
                                         <button class="btn btn-primary profile-button">Save Profile</button>
-                                        <a class="btn btn-primary" href="/home?action=delete&username=${username}">Delete</a>
                                     </div>
                                 </form>
                             </div>
