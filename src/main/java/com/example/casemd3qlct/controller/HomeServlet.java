@@ -137,7 +137,7 @@ public class HomeServlet extends HttpServlet {
             String username = userService.findByid(LoginServlet.idUserLogin).getUsername();
             System.out.println(username);
             request.setAttribute("username1", username);
-            int id1 = Integer.parseInt(request.getParameter("id"));
+            int id1 = Integer.parseInt(request.getParameter("idEdit"));
             request.setAttribute("categoryEdit", categoryService.findByid(id1));
         }
         requestDispatcher.forward(request, response);
@@ -298,7 +298,7 @@ public class HomeServlet extends HttpServlet {
     }
 
     private void editCategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int id1 = Integer.parseInt(request.getParameter("id"));
+        int id1 = Integer.parseInt(request.getParameter("idEdit"));
         String name = request.getParameter("name");
         Category category = new Category(name);
         categoryService.edit(id1, category);

@@ -237,7 +237,7 @@
                                                    href="/home?action=deleteCategory&idDelete1=${category.id}">delete</a>
                                             </td>
                                             <td><a class="btn btn-primary"
-                                                   href="/home?action=editTran&idEdit=${category.id}">edit</a>
+                                                   href="/home?action=editCategory&idEdit=${category.id}">edit</a>
                                             </td>
                                         </tr>
                                     </c:forEach>
