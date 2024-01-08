@@ -219,7 +219,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <p>Amount </p><input type="text" name="amount" value="${tranEdit.amount}" class="form-control form-control-user" placeholder="Amount">
+                                    <p>Amount </p><input type="number" name="amount" value="${tranEdit.amount}" class="form-control form-control-user" placeholder="Amount">
                                 </div>
                                 <div class="form-group">
                                     <p>Time </p> <input type="datetime-local" name="time" value="${tranEdit.time}" class="form-control form-control-user" placeholder="Time">
